@@ -1,0 +1,256 @@
+/* ========================================
+   ESTILO GENERAL DE LA PÁGINA
+   ======================================== */
+
+body {
+    background-color: #f7f7f7;
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+
+
+/* ========================================
+   ENCABEZADO PRINCIPAL
+   ======================================== */
+
+header {
+    background-color: #d9a6cf;
+}
+
+/* Contenedor interno del encabezado */
+header .container {
+    min-height: 70px;
+}
+
+/* Nombre de la aplicación */
+header h1 {
+    color: #2b2b2b;
+    font-weight: 500;
+}
+
+/* Cuadro decorativo parecido al wireframe */
+header h1::before {
+    content: "";
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    background-color: #eeeeee;
+    margin-right: 12px;
+    vertical-align: middle;
+}
+
+/* Enlaces del encabezado */
+header a {
+    color: #2b2b2b;
+    font-weight: 600;
+}
+
+/* Cambio de color cuando pasamos el mouse */
+header a:hover {
+    color: #ffffff;
+}
+
+
+/* ========================================
+   CONTENIDO PRINCIPAL
+   ======================================== */
+
+main {
+    max-width: 960px;
+}
+
+
+/* ========================================
+   PANTALLA INICIO
+   ======================================== */
+
+.seccion-inicio {
+    background-color: #dddddd;
+    min-height: 600px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+}
+
+/* Contenido central del Inicio */
+.inicio-contenido {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Título principal */
+.inicio-contenido h2 {
+    color: #222222;
+    font-size: 32px;
+    font-weight: 500;
+    margin: 0;
+}
+
+/* Mensaje debajo del título */
+.inicio-contenido p {
+    color: #222222;
+    margin: 0;
+}
+
+/* Botón Nueva tarea */
+.inicio-contenido .btn {
+    margin-top: 15px;
+    min-width: 130px;
+}
+
+
+/* ========================================
+   REGISTRAR UNA TAREA
+   ======================================== */
+
+#registrarTarea {
+    background-color: #ffffff;
+    min-height: 600px;
+    padding: 60px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Título Registrar una tarea */
+#registrarTarea h2 {
+    text-align: center;
+    color: #222222;
+    font-weight: 500;
+    margin-bottom: 35px;
+}
+
+
+/* ========================================
+   CAMPOS DEL FORMULARIO
+   ======================================== */
+
+.form-control,
+.form-select {
+    border-radius: 0;
+}
+
+/* Campo seleccionado */
+.form-control:focus,
+.form-select:focus {
+    border-color: #c98fc1;
+    box-shadow: 0 0 0 3px rgba(201, 143, 193, 0.20);
+}
+
+
+/* ========================================
+   BOTONES PRINCIPALES
+   ======================================== */
+
+.btn-primary {
+    background-color: #c98fc1;
+    border-color: #c98fc1;
+    border-radius: 0;
+}
+
+/* Botón cuando pasamos el mouse */
+.btn-primary:hover {
+    background-color: #b97daf;
+    border-color: #b97daf;
+}
+
+
+/* ========================================
+   SECCIÓN MIS TAREAS
+   ======================================== */
+
+#misTareas {
+    background-color: #ffffff;
+    min-height: 600px;
+    padding: 60px 40px;
+}
+
+/* Título Mis tareas */
+#misTareas h2 {
+    text-align: center;
+    color: #222222;
+    font-weight: 500;
+    margin-bottom: 40px;
+}
+
+
+/* ========================================
+   TARJETAS DE TAREAS
+   ======================================== */
+
+.card {
+    border: none;
+    border-left: 5px solid #c98fc1;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Contenido de cada tarjeta */
+.card-body {
+    padding: 20px;
+}
+
+
+/* ========================================
+   ESTADO SIN TAREAS
+   ======================================== */
+
+/*
+Por ahora este estado permanece oculto porque
+tenemos cinco tarjetas de ejemplo.
+
+Más adelante JavaScript podrá decidir cuándo
+mostrarlo.
+*/
+.sin-tareas {
+    display: none;
+    text-align: center;
+    padding: 20px 0 40px;
+}
+
+/* Título Sin tareas */
+.sin-tareas h3 {
+    color: #222222;
+    font-size: 28px;
+    font-weight: 500;
+    margin-bottom: 35px;
+}
+
+/* Bloque rosado central */
+.sin-tareas-contenido {
+    background-color: #d9a6cf;
+    min-height: 300px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    margin-bottom: 30px;
+}
+
+/* Círculo decorativo */
+.sin-tareas-icono {
+    width: 90px;
+    height: 90px;
+    background-color: #dddddd;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+/* Mensaje Sin tareas */
+.sin-tareas-contenido p {
+    color: #222222;
+    margin: 0;
+}
+
+/* Botón Agregar tarea */
+.sin-tareas .btn-primary {
+    min-width: 130px;
+}
