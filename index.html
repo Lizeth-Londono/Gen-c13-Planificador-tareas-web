@@ -98,99 +98,111 @@
         <!-- Sección para registrar una nueva tarea -->
         <section id="registrarTarea">
 
-            <!-- h2 = título de segundo nivel
+            <!-- Se crea el formulario para validar los datos antes de registrar una tarea -->
+            <form id="formularioTarea">
+
+                <!-- h2 = título de segundo nivel
               mb-4 = agrega espacio debajo del título
               -->
-            <h2 class="mb-4">Registrar una tarea</h2>
+                <h2 class="mb-4">Registrar una tarea</h2>
 
-            <!-- Campo para escribir el nombre de la tarea 
+                <!-- Se muestra este mensaje cuando haya un error en el formulario -->
+                 <div id="mensajeError" class="alert alert-danger d-none" role="alert">
+                    Por favor completa correctamente todos los campos.
+                 </div>
+
+                <!-- Campo para escribir el nombre de la tarea 
              div class="mb-3": agrupa el campo y deja espacio debajo
              -->
-            <div class="mb-3">
+                <div class="mb-3">
 
-                <!-- label: muestra el texto que identifica el campo
+                    <!-- label: muestra el texto que identifica el campo
                  for="nombreTarea": conecta la etiqueta con el input
                  -->
-                <label for="nombreTarea" class="form-label">Nombre de la tarea</label>
+                    <label for="nombreTarea" class="form-label">Nombre de la tarea</label>
 
-                <!-- type="text": indica que el usuario escribirá texto
+                    <!-- type="text": indica que el usuario escribirá texto
                  form-control: aplica el estilo de formulario de Bootstrap
                  id="nombreTarea": identifica ese campo
                  placeholder: muestra una ayuda dentro del campo antes de escribir
                  -->
-                <input type="text" class="form-control" id="nombreTarea" placeholder="Escribe el nombre de la tarea">
+                    <input type="text" class="form-control" id="nombreTarea"
+                        placeholder="Escribe el nombre de la tarea">
 
-                <!-- Cierro el campo nombre de la tarea-->
-            </div>
+                    <!-- Cierro el campo nombre de la tarea-->
+                </div>
 
-            <!-- Campo para escribir la descripción de la tarea -->
-            <div class="mb-3">
+                <!-- Campo para escribir la descripción de la tarea -->
+                <div class="mb-3">
 
-                <!-- label: identifica el campo de descripción -->
-                <label for="descripcionTarea" class="form-label">Descripción</label>
+                    <!-- label: identifica el campo de descripción -->
+                    <label for="descripcionTarea" class="form-label">Descripción</label>
 
-                <!-- textarea: permite escribir varias líneas de texto
+                    <!-- textarea: permite escribir varias líneas de texto
                   form-control: aplica el estilo de Bootstrap
                   id="descripcionTarea": identifica este campo
                   rows="3": define una altura inicial de tres líneas
                   placeholder: muestra una ayuda antes de escribir
                   -->
-                <textarea class="form-control" id="descripcionTarea" rows="3"
-                    placeholder="Escribe una descripción de la tarea"></textarea>
+                    <textarea class="form-control" id="descripcionTarea" rows="3"
+                        placeholder="Escribe una descripción de la tarea"></textarea>
 
-                <!-- Cierre del campo de descripción -->
-            </div>
+                    <!-- Cierre del campo de descripción -->
+                </div>
 
-            <!-- Campo para seleccionar la fecha de entrega -->
-            <div class="mb-3">
+                <!-- Campo para seleccionar la fecha de entrega -->
+                <div class="mb-3">
 
-                <!-- label: identifica el campo de fecha -->
-                <label for="fechaEntrega" class="form-label">Fecha de entrega</label>
+                    <!-- label: identifica el campo de fecha -->
+                    <label for="fechaEntrega" class="form-label">Fecha de entrega</label>
 
-                <!-- type="date": permite seleccionar una fecha
+                    <!-- type="date": permite seleccionar una fecha
                       form-control: aplica el estilo de Bootstrap
                       id="fechaEntrega": identifica este campo
                       -->
-                <input type="date" class="form-control" id="fechaEntrega">
+                    <input type="date" class="form-control" id="fechaEntrega">
 
 
-                <!-- Cierre del campo de fecha -->
-            </div>
+                    <!-- Cierre del campo de fecha -->
+                </div>
 
-            <!-- Campo para seleccionar el estado de la tarea -->
-            <div class="mb-3">
+                <!-- Campo para seleccionar el estado de la tarea -->
+                <div class="mb-3">
 
-                <!-- label: identifica el campo de estado -->
-                <label for="estadoTarea" class="form-label">Estado</label>
+                    <!-- label: identifica el campo de estado -->
+                    <label for="estadoTarea" class="form-label">Estado</label>
 
-                <!-- select: permite elegir una opción de una lista
+                    <!-- select: permite elegir una opción de una lista
                   form-select: aplica el estilo de Bootstrap
                   id="estadoTarea": identifica este campo
                   -->
-                <select class="form-select" id="estadoTarea">
+                    <select class="form-select" id="estadoTarea">
 
-                    <option selected>Selecciona un estado</option>
-                    <option value="pendiente">Pendiente</option>
-                    <option value="en-proceso">En proceso</option>
-                    <option value="completada">Completada</option>
+                        <option value="" selected>Selecciona un estado</option>
+                        <option value="pendiente">Pendiente</option>
+                        <option value="en-proceso">En proceso</option>
+                        <option value="completada">Completada</option>
 
-                    <!-- Cierre lista desplegable de estados-->
-                </select>
+                        <!-- Cierre lista desplegable de estados-->
+                    </select>
 
-                <!-- Cierre campo del estado de la tarea -->
-            </div>
+                    <!-- Cierre campo del estado de la tarea -->
+                </div>
 
-            <!-- Botón para registrar la tarea 
+                <!-- Botón para registrar la tarea 
              button crea un botón
-             type="button" indica que por ahora es un botón normal
+             type="submit" indica que es un botón de envío
              btn aplica el estilo base de botones de Bootstrap
              btn-primary aplica el estilo principal de Bootstrap
              Registrar tarea es el texto visible
              -->
-            <button type="button" class="btn btn-primary">
-                Registrar tarea
-            </button>
+                <button type="submit" class="btn btn-primary">
+                    Registrar tarea
+                </button>
 
+
+                <!-- Se cierra el formulario para validar los datos antes de registrar una tarea -->
+            </form>
 
             <!-- Cierre sección para registrar una nueva tarea -->
         </section>
@@ -411,6 +423,9 @@
 
         <!-- Cierre contenido principal -->
     </main>
+
+    <!-- Se conecta el archivo Js de la aplicación -->
+     <script src="app.js"></script>
 
 </body>
 
