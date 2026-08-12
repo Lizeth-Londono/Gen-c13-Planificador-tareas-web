@@ -8,7 +8,7 @@ Aplicación web para crear, visualizar y gestionar tareas.
 
 ## Sprint 1
 
-En este sprint se trabaja en la construcción inicial de la interfaz del Planificador de Tareas.
+En este sprint se trabaja en la construcción inicial de la interfaz y la validación del formulario del Planificador de Tareas.
 
 ### Tarea 1
 
@@ -42,6 +42,27 @@ En este sprint se trabaja en la construcción inicial de la interfaz del Planifi
   - Estado sin tareas.
 - Preparación de navegación interna mediante enlaces HTML.
 
+### Tarea 3
+
+- Vinculación del archivo `app.js` con el proyecto.
+- Uso de `document.querySelector()` para obtener los campos del formulario.
+- Captura de la información ingresada por el usuario.
+- Uso del evento `submit` para validar el formulario antes de continuar.
+- Uso de `event.preventDefault()` para evitar la recarga automática de la página durante la validación.
+- Creación de la función `validFormFieldInput(data)`.
+- Validación de campos obligatorios:
+  - Nombre de la tarea.
+  - Descripción.
+  - Fecha de entrega.
+  - Estado.
+- Validación de longitud mínima:
+  - Nombre de la tarea: mínimo 3 caracteres.
+  - Descripción: mínimo 5 caracteres.
+- Creación de mensajes específicos de validación para indicar al usuario qué campo debe corregir.
+- Creación de un mensaje de éxito cuando la información ingresada es correcta.
+- Uso de clases de Bootstrap para mostrar y ocultar los mensajes de validación.
+- Pruebas con datos correctos e incorrectos para comprobar el funcionamiento del formulario.
+
 ## Tecnologías
 
 - HTML5
@@ -49,15 +70,30 @@ En este sprint se trabaja en la construcción inicial de la interfaz del Planifi
 - Bootstrap 5
 - JavaScript
 
-> JavaScript se utilizará progresivamente en las siguientes etapas del proyecto.
-
 ## Estado del proyecto
 
-En desarrollo.
+Sprint 1 en etapa de cierre.
 
-Actualmente se encuentra construida la base visual del Sprint 1.  
-La funcionalidad se irá agregando progresivamente en las siguientes tareas del bootcamp.
+Actualmente se encuentra implementada la estructura visual del proyecto y la validación básica del formulario de registro de tareas.
 
-## Figma Wireframe Planificador-tareas-web
+Se continuará ampliando la funcionalidad del planificador en las siguientes etapas del bootcamp.
 
-[Ver wireframe en Figma] https://www.figma.com/design/1ukITbrseKkFJCGqMj0SDz/Curso-de-Figma-desde-Cero-%7C-Clase-1--Bases-Fundamentales--2025--con-UI3---Community-?node-id=2022-409&t=Pye85413VrZzxiv4-0
+## Enlaces del proyecto
+
+### Repositorio GitHub
+
+[Ver repositorio en GitHub](https://github.com/Lizeth-Londono/Gen-c13-Planificador-tareas-web)
+
+### Figma Wireframe
+
+[Ver wireframe en Figma](https://www.figma.com/design/1ukITbrseKkFJCGqMj0SDz/Curso-de-Figma-desde-Cero-%7C-Clase-1--Bases-Fundamentales--2025--con-UI3---Community-?node-id=2021-14&t=3phMiMy3SuSf3zGz-0)
+
+### Trello
+
+[Ver tablero del Sprint 1 en Trello](https://trello.com/b/dptjny67/sprint-1-planificador-de-tareas-web)
+
+## Uso de herramientas de apoyo
+
+Durante el desarrollo del proyecto se utilizaron herramientas de inteligencia artificial como apoyo para comprender conceptos, revisar código, resolver dudas y orientar algunos ajustes de estilos CSS.
+
+La implementación, pruebas y adaptación del proyecto fueron realizadas dentro del proceso de aprendizaje del Bootcamp Full Stack Java de Generation Colombia.

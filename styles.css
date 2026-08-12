@@ -22,21 +22,27 @@ header .container {
     min-height: 70px;
 }
 
+/* Se organiza el logo y el nombre de la aplicación */
+.logo-marca {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Se da forma circular al logo de LIHEN */
+.logo-lihen {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+}
+
 /* Nombre de la aplicación */
 header h1 {
     color: #2b2b2b;
     font-weight: 500;
-}
-
-/* Cuadro decorativo parecido al wireframe */
-header h1::before {
-    content: "";
-    display: inline-block;
-    width: 28px;
-    height: 28px;
-    background-color: #eeeeee;
-    margin-right: 12px;
-    vertical-align: middle;
+    margin: 0;
 }
 
 /* Enlaces del encabezado */
@@ -65,22 +71,42 @@ main {
    ======================================== */
 
 .seccion-inicio {
-    background-color: #dddddd;
     min-height: 600px;
+
+    /* Imagen de fondo */
+    background-image: url("img/fondo-inicio.webp");
+    background-size: cover;
+
+    /* Se mueve ligeramente el fondo para alinear
+       el logo LIHEN con el botón Nueva tarea */
+    background-position: calc(50% + 12px) 55%;
+
+    background-repeat: no-repeat;
+
+    /* Permite ubicar elementos dentro de la sección */
+    position: relative;
 
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
 
     text-align: center;
+
+    /* Espacio superior para el título y la frase */
+    padding-top: 25px;
 }
 
-/* Contenido central del Inicio */
+/* Contenido principal del Inicio */
 .inicio-contenido {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 12px;
+
+    /* Fondo translúcido para permitir ver la imagen */
+    background-color: rgba(255, 255, 255, 0.55);
+
+    padding: 15px 30px;
 }
 
 /* Título principal */
@@ -99,8 +125,17 @@ main {
 
 /* Botón Nueva tarea */
 .inicio-contenido .btn {
-    margin-top: 15px;
     min-width: 130px;
+
+    /* Se ubica de forma independiente del título */
+    position: absolute;
+
+    /* Se centra horizontalmente */
+    left: 50%;
+    transform: translateX(-50%);
+
+    /* Se coloca debajo del texto LIHEN */
+    top: 390px;
 }
 
 
@@ -208,6 +243,7 @@ tenemos cinco tarjetas de ejemplo.
 Más adelante JavaScript podrá decidir cuándo
 mostrarlo.
 */
+
 .sin-tareas {
     display: none;
     text-align: center;
