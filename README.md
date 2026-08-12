@@ -84,6 +84,10 @@ Se continuará ampliando la funcionalidad del planificador en las siguientes eta
 
 [Ver repositorio en GitHub](https://github.com/Lizeth-Londono/Gen-c13-Planificador-tareas-web)
 
+### Demo - GitHub Pages
+
+[Ver aplicación publicada](https://lizeth-londono.github.io/Gen-c13-Planificador-tareas-web/)
+
 ### Figma Wireframe
 
 [Ver wireframe en Figma](https://www.figma.com/design/1ukITbrseKkFJCGqMj0SDz/Curso-de-Figma-desde-Cero-%7C-Clase-1--Bases-Fundamentales--2025--con-UI3---Community-?node-id=2021-14&t=3phMiMy3SuSf3zGz-0)
@@ -94,6 +98,6 @@ Se continuará ampliando la funcionalidad del planificador en las siguientes eta
 
 ## Uso de herramientas de apoyo
 
-Durante el desarrollo del proyecto se utilizaron herramientas de inteligencia artificial como apoyo para comprender conceptos, revisar código, resolver dudas y orientar algunos ajustes de estilos CSS.
+Durante el desarrollo del proyecto se utilizaron herramientas de inteligencia artificial como apoyo para comprender conceptos, revisar código, resolver dudas, orientar algunos ajustes de estilos CSS y apoyar la organización y redacción del README.
 
-La implementación, pruebas y adaptación del proyecto fueron realizadas dentro del proceso de aprendizaje del Bootcamp Full Stack Java de Generation Colombia.
+La estructura, decisiones, implementación, pruebas, adaptación visual y ajustes realizados en el proyecto fueron desarrollados y revisados dentro de mi proceso de aprendizaje durante el Bootcamp Full Stack Java de Generation Colombia.
