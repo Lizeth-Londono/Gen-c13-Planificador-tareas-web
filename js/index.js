@@ -72,3 +72,52 @@ function validFormFieldInput(data) {
 
     return { valido: true, mensaje: "La información es correcta." };
 }
+
+// Aquí se crea una nueva instancia de TaskManager
+const taskManager = new TaskManager();
+
+// Aquí se verifica en consola la lista de tareas
+console.log(taskManager.tasks);
+
+// Aquí se busca el botón que cambia el estado de la tarea
+const botonCompletar = document.querySelector(".btn-completar");
+
+// Aquí se escucha el clic del botón para cambiar el estado de la tarea
+botonCompletar.addEventListener("click", function () {
+
+    // Aquí se busca la tarjeta donde se encuentra el botón
+    const tarjeta = botonCompletar.closest(".card");
+
+    // Aquí se busca el estado de la tarea dentro de la tarjeta
+    const estadoTarea = tarjeta.querySelector(".badge");
+
+    // Aquí se verifica si la tarea está pendiente
+    if (estadoTarea.textContent === "Pendiente") {
+
+        // Aquí se cambia el estado de la tarea a completada
+        estadoTarea.textContent = "Completada";
+
+        // Aquí se cambia el color del estado de pendiente a completada
+        estadoTarea.classList.remove("text-bg-warning");
+        estadoTarea.classList.add("text-bg-success");
+
+        // Aquí se cambia el texto del botón para volver la tarea a pendiente
+        botonCompletar.textContent = "Marcar como pendiente";
+
+        } 
+        // Aquí se devuelve la tarea al estado pendiente
+        else {
+
+            // Aquí se cambia el estado de la tarea a pendiente
+            estadoTarea.textContent = "Pendiente";
+
+            // Aquí se cambia el color del estado de completada a pendiente
+            estadoTarea.classList.remove("text-bg-success");
+            estadoTarea.classList.add("text-bg-warning");
+
+            // Aquí se cambia el texto del botón para volver a marcar la tarea como completada
+            botonCompletar.textContent = "Marcar como completada";
+
+        }
+
+});
