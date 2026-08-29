@@ -2,10 +2,23 @@
    ESTILO GENERAL DE LA PÁGINA
    ======================================== */
 
+/* Aquí se define el estilo general de toda la página */
+/* body = representa todo el contenido visible de la página */
 body {
+
+    /* background-color = define el color de fondo */
+    /* #f7f7f7 = aplica un gris muy claro */
     background-color: #f7f7f7;
+
+    /* font-family = define el tipo de letra */
+    /* Arial = fuente principal */
+    /* sans-serif = fuente alternativa si Arial no está disponible */
     font-family: Arial, sans-serif;
+
+    /* margin = controla el espacio exterior */
+    /* 0 = elimina el margen automático del navegador */
     margin: 0;
+
 }
 
 
@@ -13,47 +26,116 @@ body {
    ENCABEZADO PRINCIPAL
    ======================================== */
 
+/* Aquí se define el fondo del encabezado principal */
+/* header = representa el encabezado de la página */
 header {
+
+    /* background-color = define el color de fondo */
+    /* #d9a6cf = aplica el tono rosado del encabezado */
     background-color: #d9a6cf;
+
 }
 
-/* Contenedor interno del encabezado */
+
+/* Aquí se configura el contenedor interno del encabezado */
+/* header .container = selecciona el contenedor que está dentro del header */
 header .container {
+
+    /* min-height = define una altura mínima */
+    /* 70px = mantiene el encabezado con mínimo 70 píxeles de altura */
     min-height: 70px;
+
 }
 
-/* Se organiza el logo y el nombre de la aplicación */
+
+/* Aquí se organizan el logo y el nombre de la aplicación */
+/* .logo-marca = clase que agrupa el logo y el nombre */
 .logo-marca {
+
+    /* display = define cómo se organiza el elemento */
+    /* flex = organiza los elementos de forma flexible */
     display: flex;
+
+    /* align-items = alinea los elementos verticalmente */
+    /* center = los centra verticalmente */
     align-items: center;
+
+    /* gap = agrega espacio entre los elementos */
+    /* 12px = deja 12 píxeles entre el logo y el nombre */
     gap: 12px;
+
 }
 
-/* Se da forma circular al logo de LIHEN */
+
+/* Aquí se configura el logo de LIHEN */
+/* .logo-lihen = clase utilizada para la imagen del logo */
 .logo-lihen {
+
+    /* width = define el ancho */
+    /* 60px = establece un ancho de 60 píxeles */
     width: 60px;
+
+    /* height = define la altura */
+    /* 60px = establece una altura de 60 píxeles */
     height: 60px;
+
+    /* border-radius = redondea las esquinas */
+    /* 50% = convierte la imagen en un círculo */
     border-radius: 50%;
+
+    /* object-fit = controla cómo se ajusta la imagen */
+    /* cover = cubre el espacio sin deformar la imagen */
     object-fit: cover;
+
+    /* display = define cómo se muestra el elemento */
+    /* block = muestra la imagen como un bloque */
     display: block;
+
 }
 
-/* Nombre de la aplicación */
+
+/* Aquí se configura el nombre de la aplicación dentro del encabezado */
+/* header h1 = selecciona el título principal dentro del header */
 header h1 {
+
+    /* color = define el color del texto */
+    /* #2b2b2b = aplica un tono gris oscuro */
     color: #2b2b2b;
+
+    /* font-weight = define el grosor de la letra */
+    /* 500 = aplica un grosor medio */
     font-weight: 500;
+
+    /* margin = controla el espacio exterior */
+    /* 0 = elimina el margen automático */
     margin: 0;
+
 }
 
-/* Enlaces del encabezado */
+
+/* Aquí se configuran los enlaces del encabezado */
+/* header a = selecciona los enlaces dentro del header */
 header a {
+
+    /* color = define el color del texto */
+    /* #2b2b2b = aplica un tono gris oscuro */
     color: #2b2b2b;
+
+    /* font-weight = define el grosor de la letra */
+    /* 600 = aplica un grosor seminegrita */
     font-weight: 600;
+
 }
 
-/* Cambio de color cuando pasamos el mouse */
+
+/* Aquí se cambia el color del enlace cuando pasa el mouse */
+/* :hover = aplica estilos cuando el cursor está sobre el elemento */
 header a:hover {
+
+    /* color = define el color del texto */
+    /* #ffffff = cambia el texto a blanco */
     color: #ffffff;
+
 }
 
 
@@ -61,8 +143,39 @@ header a:hover {
    CONTENIDO PRINCIPAL
    ======================================== */
 
+/* Aquí se controla el ancho máximo del contenido principal */
+/* main = representa el contenido principal de la página */
 main {
+
+    /* max-width = establece el ancho máximo permitido */
+    /* 960px = limita el contenido a 960 píxeles */
     max-width: 960px;
+
+    /* padding-left = controla el espacio interno del lado izquierdo */
+    /* 0 = elimina el espacio lateral agregado por Bootstrap */
+    /* !important = da prioridad a este valor sobre Bootstrap */
+    padding-left: 0 !important;
+
+    /* padding-right = controla el espacio interno del lado derecho */
+    /* 0 = elimina el espacio lateral agregado por Bootstrap */
+    padding-right: 0 !important;
+
+}
+
+
+/* Aquí se mantiene el mismo ancho para las secciones principales */
+/* width = define el ancho del elemento */
+/* 100% = ocupa todo el ancho disponible dentro de main */
+/* box-sizing = controla cómo se calcula el ancho */
+/* border-box = incluye el padding dentro del ancho total */
+.seccion-inicio,
+#registrarTarea,
+#misTareas {
+
+    width: 100%;
+
+    box-sizing: border-box;
+
 }
 
 
@@ -70,72 +183,153 @@ main {
    PANTALLA INICIO
    ======================================== */
 
+/* Aquí se configura la sección principal de Inicio */
+/* .seccion-inicio = clase de la pantalla inicial */
 .seccion-inicio {
+
+    /* min-height = establece una altura mínima */
+    /* 600px = mantiene la sección con mínimo 600 píxeles de altura */
     min-height: 600px;
 
-    /* Imagen de fondo */
+    /* background-image = coloca una imagen como fondo */
+    /* url = indica la ubicación de la imagen */
     background-image: url("img/fondo-inicio.webp");
+
+    /* background-size = controla el tamaño de la imagen de fondo */
+    /* cover = hace que la imagen cubra toda la sección */
     background-size: cover;
 
-    /* Se mueve ligeramente el fondo para alinear
-       el logo LIHEN con el botón Nueva tarea */
+    /* background-position = define la posición de la imagen */
+    /* calc = permite calcular una posición personalizada */
+    /* 50% + 12px = mueve el fondo ligeramente hacia la derecha */
+    /* 55% = ajusta la posición vertical */
     background-position: calc(50% + 12px) 55%;
 
+    /* background-repeat = controla si la imagen se repite */
+    /* no-repeat = evita que la imagen se repita */
     background-repeat: no-repeat;
 
-    /* Permite ubicar elementos dentro de la sección */
+    /* position = define la forma en que se posiciona el elemento */
+    /* relative = permite posicionar elementos internos tomando esta sección como referencia */
     position: relative;
 
+    /* display = define cómo se organizan los elementos */
+    /* flex = activa Flexbox */
     display: flex;
+
+    /* justify-content = alinea los elementos horizontalmente */
+    /* center = los centra horizontalmente */
     justify-content: center;
+
+    /* align-items = alinea los elementos verticalmente */
+    /* flex-start = los coloca desde la parte superior */
     align-items: flex-start;
 
+    /* text-align = define la alineación del texto */
+    /* center = centra el texto */
     text-align: center;
 
-    /* Espacio superior para el título y la frase */
+    /* padding-top = agrega espacio interno arriba */
+    /* 25px = deja 25 píxeles de espacio superior */
     padding-top: 25px;
+
 }
 
-/* Contenido principal del Inicio */
+
+/* Aquí se organiza el contenido principal de Inicio */
+/* .inicio-contenido = bloque donde están el título, mensaje y botón */
 .inicio-contenido {
+
+    /* display = define cómo se organizan los elementos */
+    /* flex = activa Flexbox */
     display: flex;
+
+    /* flex-direction = define la dirección de los elementos */
+    /* column = coloca los elementos uno debajo del otro */
     flex-direction: column;
+
+    /* align-items = alinea los elementos verticalmente */
+    /* center = los centra */
     align-items: center;
+
+    /* gap = agrega espacio entre los elementos */
+    /* 12px = deja 12 píxeles entre ellos */
     gap: 12px;
 
-    /* Fondo translúcido para permitir ver la imagen */
+    /* background-color = define el fondo */
+    /* rgba = permite usar transparencia */
+    /* 0.55 = aplica transparencia al fondo blanco */
     background-color: rgba(255, 255, 255, 0.55);
 
+    /* padding = agrega espacio interno */
+    /* 15px 30px = 15px arriba y abajo, 30px a los lados */
     padding: 15px 30px;
+
 }
 
-/* Título principal */
+
+/* Aquí se configura el título principal de Inicio */
+/* .inicio-contenido h2 = selecciona el h2 dentro del bloque de Inicio */
 .inicio-contenido h2 {
+
+    /* color = define el color del texto */
+    /* #222222 = aplica un gris oscuro */
     color: #222222;
+
+    /* font-size = define el tamaño del texto */
+    /* 32px = establece un tamaño de 32 píxeles */
     font-size: 32px;
+
+    /* font-weight = define el grosor de la letra */
+    /* 500 = aplica un grosor medio */
     font-weight: 500;
+
+    /* margin = controla el espacio exterior */
+    /* 0 = elimina el margen automático */
     margin: 0;
+
 }
 
-/* Mensaje debajo del título */
+
+/* Aquí se configura el mensaje debajo del título */
+/* .inicio-contenido p = selecciona el párrafo dentro del bloque de Inicio */
 .inicio-contenido p {
+
+    /* color = define el color del texto */
+    /* #222222 = aplica un gris oscuro */
     color: #222222;
+
+    /* margin = controla el espacio exterior */
+    /* 0 = elimina el margen automático */
     margin: 0;
+
 }
 
-/* Botón Nueva tarea */
+
+/* Aquí se configura el botón Nueva tarea */
+/* .inicio-contenido .btn = selecciona el botón dentro del bloque de Inicio */
 .inicio-contenido .btn {
+
+    /* min-width = establece un ancho mínimo */
+    /* 130px = mantiene el botón con mínimo 130 píxeles */
     min-width: 130px;
 
-    /* Se ubica de forma independiente del título */
+    /* position = define cómo se posiciona el elemento */
+    /* absolute = permite ubicar el botón con coordenadas */
     position: absolute;
 
-    /* Se centra horizontalmente */
+    /* left = define la posición desde la izquierda */
+    /* 50% = coloca el botón inicialmente en el centro */
     left: 50%;
+
+    /* transform = permite mover o transformar un elemento */
+    /* translateX(-50%) = corrige el centro horizontal del botón */
     transform: translateX(-50%);
 
-    /* Se coloca debajo del texto LIHEN */
+    /* top = define la distancia desde la parte superior */
+    /* 390px = coloca el botón a 390 píxeles desde arriba */
     top: 390px;
+
 }
 
 
@@ -143,22 +337,57 @@ main {
    REGISTRAR UNA TAREA
    ======================================== */
 
+/* Aquí se configura la sección Registrar una tarea */
+/* #registrarTarea = selecciona la sección por su id */
 #registrarTarea {
+
+    /* background-color = define el color de fondo */
+    /* #ffffff = aplica fondo blanco */
     background-color: #ffffff;
+
+    /* min-height = establece una altura mínima */
+    /* 600px = mantiene la sección con mínimo 600 píxeles */
     min-height: 600px;
+
+    /* padding = agrega espacio interno */
+    /* 60px = deja 60 píxeles alrededor del contenido */
     padding: 60px;
 
+    /* display = define cómo se organizan los elementos */
+    /* flex = activa Flexbox */
     display: flex;
+
+    /* flex-direction = define la dirección de los elementos */
+    /* column = los coloca uno debajo del otro */
     flex-direction: column;
+
+    /* justify-content = alinea el contenido dentro del contenedor */
+    /* center = lo centra verticalmente */
     justify-content: center;
+
 }
 
-/* Título Registrar una tarea */
+
+/* Aquí se configura el título Registrar una tarea */
+/* #registrarTarea h2 = selecciona el título dentro de esta sección */
 #registrarTarea h2 {
+
+    /* text-align = alinea el texto */
+    /* center = centra el texto */
     text-align: center;
+
+    /* color = define el color del texto */
+    /* #222222 = aplica un gris oscuro */
     color: #222222;
+
+    /* font-weight = define el grosor de la letra */
+    /* 500 = aplica un grosor medio */
     font-weight: 500;
+
+    /* margin-bottom = agrega espacio debajo */
+    /* 35px = deja 35 píxeles de separación inferior */
     margin-bottom: 35px;
+
 }
 
 
@@ -166,16 +395,32 @@ main {
    CAMPOS DEL FORMULARIO
    ======================================== */
 
+/* Aquí se configuran los campos y listas del formulario */
+/* .form-control = campos de texto de Bootstrap */
+/* .form-select = listas desplegables de Bootstrap */
 .form-control,
 .form-select {
+
+    /* border-radius = controla el redondeo de las esquinas */
+    /* 0 = deja las esquinas rectas */
     border-radius: 0;
+
 }
 
-/* Campo seleccionado */
+
+/* Aquí se configura el campo cuando está seleccionado */
+/* :focus = se activa cuando el usuario selecciona el campo */
 .form-control:focus,
 .form-select:focus {
+
+    /* border-color = define el color del borde */
+    /* #c98fc1 = aplica el tono rosado */
     border-color: #c98fc1;
+
+    /* box-shadow = agrega una sombra alrededor del campo */
+    /* rgba = permite aplicar transparencia al color */
     box-shadow: 0 0 0 3px rgba(201, 143, 193, 0.20);
+
 }
 
 
@@ -183,16 +428,37 @@ main {
    BOTONES PRINCIPALES
    ======================================== */
 
+/* Aquí se configura el botón principal */
+/* .btn-primary = clase principal de botones de Bootstrap */
 .btn-primary {
+
+    /* background-color = define el color de fondo */
+    /* #c98fc1 = aplica el tono rosado */
     background-color: #c98fc1;
+
+    /* border-color = define el color del borde */
+    /* #c98fc1 = mantiene el borde del mismo tono */
     border-color: #c98fc1;
+
+    /* border-radius = controla el redondeo */
+    /* 0 = deja las esquinas rectas */
     border-radius: 0;
+
 }
 
-/* Botón cuando pasamos el mouse */
+
+/* Aquí se cambia el botón cuando pasa el mouse */
+/* :hover = aplica estilos cuando el cursor está sobre el botón */
 .btn-primary:hover {
+
+    /* background-color = cambia el color de fondo */
+    /* #b97daf = aplica un rosado más oscuro */
     background-color: #b97daf;
+
+    /* border-color = cambia el color del borde */
+    /* #b97daf = mantiene el borde con el mismo tono */
     border-color: #b97daf;
+
 }
 
 
@@ -200,18 +466,45 @@ main {
    SECCIÓN MIS TAREAS
    ======================================== */
 
+/* Aquí se configura la sección Mis tareas */
+/* #misTareas = selecciona la sección por su id */
 #misTareas {
+
+    /* background-color = define el color de fondo */
+    /* #ffffff = aplica fondo blanco */
     background-color: #ffffff;
+
+    /* min-height = establece una altura mínima */
+    /* 600px = mantiene la sección con mínimo 600 píxeles */
     min-height: 600px;
+
+    /* padding = agrega espacio interno */
+    /* 60px 40px = 60px arriba y abajo, 40px a los lados */
     padding: 60px 40px;
+
 }
 
-/* Título Mis tareas */
+
+/* Aquí se configura el título Mis tareas */
+/* #misTareas h2 = selecciona el título dentro de esta sección */
 #misTareas h2 {
+
+    /* text-align = alinea el texto */
+    /* center = centra el texto */
     text-align: center;
+
+    /* color = define el color del texto */
+    /* #222222 = aplica un gris oscuro */
     color: #222222;
+
+    /* font-weight = define el grosor de la letra */
+    /* 500 = aplica un grosor medio */
     font-weight: 500;
+
+    /* margin-bottom = agrega espacio debajo del elemento */
+    /* 40px = deja 40 píxeles de separación inferior */
     margin-bottom: 40px;
+
 }
 
 
@@ -219,16 +512,39 @@ main {
    TARJETAS DE TAREAS
    ======================================== */
 
+/* Aquí se configura el diseño de las tarjetas */
+/* .card = clase de Bootstrap utilizada para crear tarjetas */
 .card {
+
+    /* border = controla el borde */
+    /* none = elimina el borde normal */
     border: none;
+
+    /* border-left = agrega un borde solo al lado izquierdo */
+    /* 5px = define el grosor */
+    /* solid = crea una línea continua */
+    /* #c98fc1 = aplica el tono rosado */
     border-left: 5px solid #c98fc1;
+
+    /* border-radius = redondea las esquinas */
+    /* 10px = aplica un redondeo de 10 píxeles */
     border-radius: 10px;
+
+    /* box-shadow = agrega una sombra alrededor de la tarjeta */
+    /* rgba = permite utilizar transparencia */
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
 }
 
-/* Contenido de cada tarjeta */
+
+/* Aquí se configura el contenido interno de cada tarjeta */
+/* .card-body = contiene la información de la tarjeta */
 .card-body {
+
+    /* padding = agrega espacio interno */
+    /* 20px = deja 20 píxeles alrededor del contenido */
     padding: 20px;
+
 }
 
 
@@ -237,56 +553,136 @@ main {
    ======================================== */
 
 /*
-Por ahora este estado permanece oculto porque
-tenemos cinco tarjetas de ejemplo.
-
-Más adelante JavaScript podrá decidir cuándo
-mostrarlo.
+   Aquí se mantiene oculto temporalmente el estado sin tareas.
+   Por ahora existen cinco tarjetas de ejemplo.
+   Más adelante JavaScript podrá decidir cuándo mostrarlo.
 */
 
+/* Aquí se configura el bloque que se utilizará cuando no existan tareas */
+/* .sin-tareas = clase del estado sin tareas */
 .sin-tareas {
+
+    /* display = define cómo se muestra el elemento */
+    /* none = mantiene el elemento oculto */
     display: none;
+
+    /* text-align = alinea el texto */
+    /* center = centra el contenido */
     text-align: center;
+
+    /* padding = agrega espacio interno */
+    /* 20px 0 40px = 20px arriba, 0 a los lados y 40px abajo */
     padding: 20px 0 40px;
+
 }
 
-/* Título Sin tareas */
+
+/* Aquí se configura el título del estado sin tareas */
+/* .sin-tareas h3 = selecciona el título dentro del bloque */
 .sin-tareas h3 {
+
+    /* color = define el color del texto */
+    /* #222222 = aplica un gris oscuro */
     color: #222222;
+
+    /* font-size = define el tamaño del texto */
+    /* 28px = establece un tamaño de 28 píxeles */
     font-size: 28px;
+
+    /* font-weight = define el grosor de la letra */
+    /* 500 = aplica un grosor medio */
     font-weight: 500;
+
+    /* margin-bottom = agrega espacio debajo */
+    /* 35px = deja 35 píxeles de separación inferior */
     margin-bottom: 35px;
+
 }
 
-/* Bloque rosado central */
+
+/* Aquí se configura el bloque rosado central */
+/* .sin-tareas-contenido = contenedor central del estado sin tareas */
 .sin-tareas-contenido {
+
+    /* background-color = define el color de fondo */
+    /* #d9a6cf = aplica el tono rosado */
     background-color: #d9a6cf;
+
+    /* min-height = establece una altura mínima */
+    /* 300px = mantiene el bloque con mínimo 300 píxeles */
     min-height: 300px;
 
+    /* display = define cómo se organizan los elementos */
+    /* flex = activa Flexbox */
     display: flex;
+
+    /* flex-direction = define la dirección de los elementos */
+    /* column = los coloca uno debajo del otro */
     flex-direction: column;
+
+    /* justify-content = alinea los elementos en el eje principal */
+    /* center = los centra */
     justify-content: center;
+
+    /* align-items = alinea los elementos en el eje contrario */
+    /* center = los centra */
     align-items: center;
 
+    /* margin-bottom = agrega espacio debajo */
+    /* 30px = deja 30 píxeles de separación inferior */
     margin-bottom: 30px;
+
 }
 
-/* Círculo decorativo */
+
+/* Aquí se configura el círculo decorativo */
+/* .sin-tareas-icono = elemento decorativo del estado sin tareas */
 .sin-tareas-icono {
+
+    /* width = define el ancho */
+    /* 90px = establece un ancho de 90 píxeles */
     width: 90px;
+
+    /* height = define la altura */
+    /* 90px = establece una altura de 90 píxeles */
     height: 90px;
+
+    /* background-color = define el color de fondo */
+    /* #dddddd = aplica un gris claro */
     background-color: #dddddd;
+
+    /* border-radius = redondea las esquinas */
+    /* 50% = convierte el elemento en un círculo */
     border-radius: 50%;
+
+    /* margin-bottom = agrega espacio debajo */
+    /* 20px = deja 20 píxeles de separación inferior */
     margin-bottom: 20px;
+
 }
 
-/* Mensaje Sin tareas */
+
+/* Aquí se configura el mensaje del estado sin tareas */
+/* .sin-tareas-contenido p = selecciona el párrafo dentro del bloque */
 .sin-tareas-contenido p {
+
+    /* color = define el color del texto */
+    /* #222222 = aplica un gris oscuro */
     color: #222222;
+
+    /* margin = controla el espacio exterior */
+    /* 0 = elimina el margen automático */
     margin: 0;
+
 }
 
-/* Botón Agregar tarea */
+
+/* Aquí se configura el botón Agregar tarea */
+/* .sin-tareas .btn-primary = selecciona el botón principal dentro del estado sin tareas */
 .sin-tareas .btn-primary {
+
+    /* min-width = establece un ancho mínimo */
+    /* 130px = mantiene el botón con mínimo 130 píxeles */
     min-width: 130px;
+
 }
