@@ -25,6 +25,12 @@ const mensajeError = document.querySelector("#mensajeError");
 // mensajeExito = guarda el elemento donde se mostrará un mensaje de éxito
 const mensajeExito = document.querySelector("#mensajeExito");
 
+// Aquí se busca el contenedor donde se encuentran las tareas
+// listaTareas = guarda el contenedor de las tarjetas de tareas
+// document = representa el documento HTML
+// querySelector = busca el primer elemento que coincida
+// #listaTareas = identifica el contenedor por su id
+const listaTareas = document.querySelector("#listaTareas");
 
 // Aquí se escucha cuando el usuario intenta enviar el formulario
 // addEventListener = escucha una acción que ocurre en un elemento
@@ -108,6 +114,14 @@ formularioTarea.addEventListener("submit", function (event) {
             datosTarea.estado
 
         );
+
+        // Aquí se guardan las tareas después de registrar una nueva tarea
+        // save = guarda la lista actual de tareas en localStorage
+        taskManager.save();
+
+        // Aquí se actualiza la lista de tareas mostrada en la página
+        // render = vuelve a construir visualmente las tarjetas con las tareas actuales
+        taskManager.render();
 
         // Aquí se verifica que la tarea del formulario se haya guardado
         // console.log = muestra la lista actualizada en la consola
@@ -209,25 +223,70 @@ function validFormFieldInput(data) {
 
 }
 
-
 // Aquí se crea una nueva instancia de TaskManager
 // taskManager = variable que guarda el administrador de tareas
 // new = crea una nueva instancia
 // TaskManager() = utiliza la clase TaskManager y ejecuta su constructor
 const taskManager = new TaskManager();
 
+
+// Aquí se recuperan las tareas guardadas cuando se inicia la aplicación
+// load = carga las tareas almacenadas anteriormente en localStorage
+taskManager.load();
+
+
+// Aquí se muestran en la página las tareas recuperadas
+// render = actualiza visualmente la lista con las tareas cargadas
+taskManager.render();
+
 // Aquí se verifica en consola la lista de tareas
 // console.log = muestra información en la consola del navegador
 // taskManager.tasks = arreglo donde se guardan las tareas
 console.log(taskManager.tasks);
 
+// Aquí se escucha cuando el usuario hace clic dentro de la lista de tareas
+// addEventListener = escucha una acción que ocurre en un elemento
+// click = acción de hacer clic
+// event = guarda la información del elemento sobre el que se hizo clic
+listaTareas.addEventListener("click", function (event) {
+
+    // Aquí se verifica si el elemento presionado es el botón para eliminar una tarea
+    // event.target = representa el elemento exacto sobre el que se hizo clic
+    // classList = permite trabajar con las clases del elemento
+    // contains = verifica si existe una clase
+    // delete-button = clase utilizada para identificar el botón Eliminar
+    if (event.target.classList.contains("delete-button")) {
+
+        // Aquí se busca la tarjeta que contiene el botón presionado
+        // closest = busca el elemento superior más cercano que coincida
+        // .card = clase que identifica la tarjeta de la tarea
+        const parentTask = event.target.closest(".card");
+
+        // Aquí se obtiene el identificador guardado en la tarjeta
+        // dataset = permite acceder a los atributos data-* del elemento
+        // taskId = corresponde al atributo data-task-id
+        // Number = convierte el valor recibido de texto a número
+        const taskId = Number(parentTask.dataset.taskId);
+
+        // Aquí se elimina del arreglo la tarea seleccionada
+        // deleteTask = elimina la tarea que tenga el identificador recibido
+        taskManager.deleteTask(taskId);
+
+        // Aquí se guardan nuevamente las tareas después de eliminar
+        taskManager.save();
+
+        // Aquí se actualiza la lista para que desaparezca la tarea eliminada
+        taskManager.render();
+
+    }
+
+});
 
 // Aquí se buscan todos los botones que permiten cambiar el estado de las tareas
 // querySelectorAll = busca todos los elementos que coincidan
 // .btn-completar = clase utilizada para identificar los botones
 // botonesCompletar = guarda todos los botones encontrados
 const botonesCompletar = document.querySelectorAll(".btn-completar");
-
 
 // Aquí se recorren los botones uno por uno
 // forEach = recorre los elementos de una lista
