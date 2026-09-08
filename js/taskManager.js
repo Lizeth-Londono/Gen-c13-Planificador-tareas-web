@@ -66,6 +66,38 @@ class TaskManager {
 
     }
 
+    // Aquí se crea el método que permite buscar una tarea por su identificador.
+    // getTaskById = nombre del método que recupera una tarea específica.
+    // taskId = identificador de la tarea que se quiere encontrar.
+    getTaskById(taskId) {
+
+        // Aquí se crea una variable para guardar la tarea encontrada.
+        // let = permite que el valor de la variable sea asignado posteriormente.
+        // foundTask = almacenará la tarea cuyo identificador coincida.
+        let foundTask;
+
+        // Aquí se recorren una por una las tareas almacenadas.
+        // for...of = permite recorrer los elementos de un arreglo.
+        // this.tasks = arreglo donde se encuentran las tareas.
+        for (let task of this.tasks) {
+
+            // Aquí se compara el identificador de la tarea actual con el recibido.
+            // === = comprueba que ambos valores sean iguales y del mismo tipo.
+            if (task.id === taskId) {
+
+                // Aquí se guarda la tarea que tiene el identificador buscado.
+                foundTask = task;
+
+            }
+
+        }
+
+        // Aquí se devuelve la tarea encontrada.
+        // Si no existe una coincidencia, el resultado será undefined.
+        return foundTask;
+
+    }
+
     // Aquí se crea el método que construye la tarjeta de una tarea
     // createTaskHtml = nombre del método que crea el HTML de una tarea
     // task = parámetro que recibe el objeto con la información de la tarea
@@ -166,7 +198,7 @@ class TaskManager {
                             <!-- btn-completar = clase utilizada desde JavaScript para identificar el botón -->
                             <!-- btn-success = aplica el estilo verde de Bootstrap -->
 
-                            <button type="button" class="btn btn-success btn-completar">
+                            <button type="button" class="btn btn-success btn-completar done-button">
                                 ${textoBoton}
                             </button>
 

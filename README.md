@@ -6,12 +6,14 @@ Proyecto individual desarrollado durante el Bootcamp Full Stack Java de Generati
 
 Aplicación web para crear, visualizar y gestionar tareas.
 
-El proyecto se desarrolla de forma progresiva durante las diferentes tareas propuestas en el bootcamp, incorporando estructura visual, validaciones, manejo de eventos, clases, objetos, arreglos, persistencia de datos y administración de tareas mediante JavaScript.
+El proyecto se desarrolló progresivamente mediante las diferentes tareas propuestas durante el bootcamp. En su construcción se incorporaron estructura visual, formularios, validaciones, eventos, clases, objetos, arreglos, renderizado dinámico, persistencia de información y administración de tareas mediante JavaScript.
+
+La interfaz utiliza una identidad visual personalizada e inspirada en la gama pastel de LIHEN.
 
 
 ## Sprint 1
 
-En este sprint se trabajó en la construcción inicial de la interfaz y la validación del formulario del Planificador de Tareas.
+En este sprint se trabajó en la construcción inicial de la interfaz y en la validación del formulario del Planificador de Tareas.
 
 
 ### Tarea 1
@@ -19,18 +21,17 @@ En este sprint se trabajó en la construcción inicial de la interfaz y la valid
 - Creación de la estructura inicial del proyecto.
 - Construcción del formulario para registrar una tarea.
 - Uso de HTML5 y Bootstrap.
-- Creación de los campos:
+- Creación de los siguientes campos:
   - Nombre de la tarea.
   - Descripción.
   - Fecha de entrega.
   - Estado.
-
 - Creación del botón para registrar una tarea.
 
 
 ### Tarea 2
 
-- Creación del componente visual de tarjeta de tarea usando Bootstrap Card.
+- Creación del componente visual de tarjeta utilizando Bootstrap Card.
 - Construcción del contenedor `listaTareas`.
 - Creación de cinco tareas de ejemplo con información diferente.
 - Visualización de:
@@ -38,16 +39,14 @@ En este sprint se trabajó en la construcción inicial de la interfaz y la valid
   - Descripción.
   - Fecha de entrega.
   - Estado.
-
 - Uso de Bootstrap Badge para representar visualmente los estados.
-- Aplicación de estilos personalizados con CSS.
+- Aplicación de estilos personalizados mediante CSS.
 - Adaptación visual basada en el wireframe realizado en Figma.
-- Preparación visual de las secciones:
+- Preparación de las siguientes secciones:
   - Inicio.
   - Registrar tarea.
   - Mis tareas.
   - Estado sin tareas.
-
 - Preparación de navegación interna mediante enlaces HTML.
 
 
@@ -56,28 +55,28 @@ En este sprint se trabajó en la construcción inicial de la interfaz y la valid
 - Vinculación del archivo `js/index.js` con el proyecto.
 - Uso de `document.querySelector()` para obtener los campos del formulario.
 - Captura de la información ingresada por el usuario.
-- Uso del evento `submit` para validar el formulario antes de continuar.
-- Uso de `event.preventDefault()` para evitar la recarga automática de la página durante la validación.
+- Uso del evento `submit` para validar el formulario.
+- Uso de `event.preventDefault()` para evitar la recarga automática de la página.
 - Creación de la función `validFormFieldInput(data)`.
-- Validación de campos obligatorios:
+- Validación de los siguientes campos obligatorios:
   - Nombre de la tarea.
   - Descripción.
   - Fecha de entrega.
   - Estado.
-
 - Validación de longitud mínima:
   - Nombre de la tarea: mínimo 3 caracteres.
   - Descripción: mínimo 5 caracteres.
-
-- Creación de mensajes específicos de validación para indicar al usuario qué campo debe corregir.
+- Creación de mensajes específicos de validación.
 - Creación de un mensaje de éxito cuando la información ingresada es correcta.
-- Uso de clases de Bootstrap para mostrar y ocultar los mensajes de validación.
-- Pruebas con datos correctos e incorrectos para comprobar el funcionamiento del formulario.
+- Uso de clases de Bootstrap para mostrar y ocultar los mensajes.
+- Pruebas con información correcta e incorrecta.
 
 
 ## Sprint 2
 
-En este sprint se incorporó comportamiento dinámico al Planificador de Tareas mediante JavaScript, permitiendo administrar las tareas, trabajar con información almacenada en objetos y arreglos, cambiar estados, eliminar tareas y mantener la información después de recargar la aplicación.
+En este sprint se incorporó comportamiento dinámico al Planificador de Tareas mediante JavaScript.
+
+La aplicación permite administrar tareas almacenadas en objetos y arreglos, cambiar sus estados, eliminar registros y conservar la información después de recargar la página.
 
 
 ### Tarea 4
@@ -85,33 +84,29 @@ En este sprint se incorporó comportamiento dinámico al Planificador de Tareas 
 - Creación del archivo `js/taskManager.js`.
 - Creación de la clase `TaskManager`.
 - Creación del constructor de la clase.
-- Creación del arreglo inicial donde se almacenarán las tareas:
+- Creación del arreglo inicial donde se almacenan las tareas:
 
 ```js
 this.tasks = [];
 ```
 
-- Creación de una instancia de `TaskManager` desde el archivo `js/index.js`.
-- Verificación inicial del arreglo de tareas mediante la consola del navegador.
-- Uso de JavaScript para trabajar con los botones de las tarjetas de tareas.
-- Uso de `document.querySelectorAll()` para seleccionar varios botones de la interfaz.
+- Creación de una instancia de `TaskManager` desde `js/index.js`.
+- Verificación inicial del arreglo mediante la consola.
+- Uso de JavaScript para trabajar con los botones de las tarjetas.
+- Uso de `document.querySelectorAll()` para seleccionar varios botones.
 - Uso de `forEach()` para recorrer los botones encontrados.
-- Uso de `addEventListener("click")` para detectar cuando el usuario hace clic sobre un botón.
-- Uso de `closest()` para identificar la tarjeta correspondiente al botón seleccionado.
-- Uso de `querySelector()` dentro de cada tarjeta para identificar los elementos que debían modificarse.
-- Implementación del cambio visual del estado de las tareas.
-- Cambio del texto del estado mediante `textContent`.
-- Uso de `classList.remove()` y `classList.add()` para modificar las clases de Bootstrap.
-- Cambio visual de los estados de las tareas.
-- Implementación de botones para cambiar una tarea entre:
-  - Pendiente.
-  - Completada.
-
-- Cambio del texto del botón dependiendo del estado de la tarea:
-  - Marcar como completada.
-  - Marcar como pendiente.
-
-- Pruebas individuales sobre las tarjetas para comprobar el cambio de estado.
+- Uso de `addEventListener("click")` para detectar los clics.
+- Uso de `closest()` para identificar la tarjeta seleccionada.
+- Uso de `querySelector()` dentro de cada tarjeta.
+- Cambio visual del estado mediante `textContent`.
+- Uso de `classList.remove()` y `classList.add()`.
+- Cambio de las tareas entre los estados:
+  - `PORHACER`.
+  - `COMPLETADA`.
+- Cambio del texto del botón entre:
+  - `Marcar como completada`.
+  - `Marcar como pendiente`.
+- Pruebas individuales sobre las tarjetas.
 
 
 ### Tarea 5
@@ -135,119 +130,127 @@ this.currentId = currentId;
 this.tasks = [];
 ```
 
-- Creación del método `addTask()` para registrar nuevas tareas:
+- Creación del método `addTask()`:
 
 ```js
 addTask(nombre, descripcion, fechaEntrega, estado)
 ```
 
-- Incremento automático del identificador antes de registrar una nueva tarea:
+- Incremento automático del identificador:
 
 ```js
 this.currentId++;
 ```
 
-- Uso del método `push()` para agregar una nueva tarea al arreglo `tasks`.
-- Creación de objetos para representar cada nueva tarea.
-- Cada objeto de tarea contiene las propiedades:
-
+- Uso de `push()` para agregar una tarea al arreglo.
+- Creación de objetos para representar cada tarea.
+- Incorporación de las siguientes propiedades:
   - `id`.
   - `nombre`.
   - `descripcion`.
   - `fechaEntrega`.
   - `estado`.
-
-- Asignación automática de un identificador único y consecutivo para cada nueva tarea.
-- Definición del estado inicial de las nuevas tareas como:
+- Asignación de identificadores únicos y consecutivos.
+- Definición del estado inicial:
 
 ```js
 "PORHACER"
 ```
 
-- Realización de pruebas programáticas para comprobar el funcionamiento de `TaskManager`.
-- Prueba de registro de una primera tarea.
-- Prueba de registro de una segunda tarea.
-- Comprobación de que la primera tarea obtiene el identificador `1`.
-- Comprobación de que la segunda tarea obtiene el identificador `2`.
-- Verificación del incremento automático de `currentId`.
-- Verificación del contenido almacenado dentro de `taskManager.tasks`.
-- Integración de `TaskManager` con el formulario de registro de tareas.
-- Conservación de las validaciones realizadas anteriormente en la Tarea 3.
-- Creación del objeto `datosTarea` con la información ingresada por el usuario.
-- Validación de la información antes de agregar una tarea.
-- Ejecución de `taskManager.addTask()` únicamente cuando los datos del formulario son válidos.
-- Verificación de que un formulario con información incorrecta no agrega una nueva tarea.
-- Uso de `console.log()` para visualizar el arreglo actualizado de tareas durante las pruebas.
-- Uso de `formularioTarea.reset()` después de registrar correctamente una tarea.
-- Limpieza automática de los campos del formulario después de un registro válido.
-- Conservación del mensaje de error cuando la información ingresada no cumple las validaciones.
-- Conservación del mensaje de éxito cuando la información es válida.
-- Prueba del formulario desde un estado inicial vacío.
-- Comprobación de una primera tarea registrada desde el formulario con `id: 1`.
-- Comprobación de una segunda tarea registrada desde el formulario con `id: 2`.
-- Comprobación del aumento del número de elementos dentro del arreglo `tasks`.
-- Prueba de formulario inválido para verificar que el arreglo no aumente.
-- Verificación de que la página no se recargue durante el envío del formulario gracias a `event.preventDefault()`.
+- Integración de `TaskManager` con el formulario.
+- Creación del objeto `datosTarea`.
+- Validación de la información antes de registrar la tarea.
+- Ejecución de `taskManager.addTask()` cuando la información es válida.
+- Prevención del registro cuando existen errores.
+- Uso de `formularioTarea.reset()` después de un registro válido.
+- Conservación de los mensajes de error y éxito.
+- Pruebas del incremento de `currentId`.
+- Pruebas de registro con formularios válidos e inválidos.
 
 
 ### Tarea 6
 
 - Implementación de la funcionalidad para eliminar tareas.
-- Creación del método `createTaskHtml()` para construir dinámicamente las tarjetas de las tareas.
-- Uso del atributo `data-task-id` para relacionar cada tarjeta con el identificador de su tarea.
-- Creación del botón `Eliminar` dentro de cada tarjeta generada dinámicamente.
-- Creación del método `deleteTask(taskId)` dentro de la clase `TaskManager`.
-- Uso de un nuevo arreglo para conservar únicamente las tareas cuyo identificador sea diferente al de la tarea seleccionada.
-- Actualización del arreglo principal `this.tasks` después de eliminar una tarea.
-- Uso de `addEventListener("click")` sobre el contenedor `listaTareas`.
-- Uso de `event.target` para identificar el elemento sobre el que el usuario realiza clic.
-- Uso de `classList.contains()` para verificar si el elemento seleccionado corresponde al botón `delete-button`.
-- Uso de `closest(".card")` para identificar la tarjeta correspondiente al botón seleccionado.
-- Uso de `dataset.taskId` para recuperar el identificador almacenado en `data-task-id`.
-- Uso de `Number()` para convertir el identificador recuperado a un valor numérico.
-- Creación del método `save()` para guardar las tareas en `localStorage`.
-- Uso de `JSON.stringify()` para convertir el arreglo de tareas en texto antes de almacenarlo.
-- Creación del método `load()` para recuperar las tareas almacenadas cuando se inicia o recarga la aplicación.
-- Uso de `localStorage.getItem()` para recuperar la información guardada.
-- Uso de `JSON.parse()` para convertir nuevamente el texto almacenado en un arreglo de JavaScript.
-- Recuperación del identificador más alto después de cargar las tareas para conservar la secuencia de `currentId`.
-- Creación del método `render()` para actualizar dinámicamente la lista de tareas mostrada en la página.
-- Uso de `innerHTML` para limpiar y reconstruir el contenido del contenedor `listaTareas`.
-- Conservación de las tareas después de recargar la página mediante `localStorage`.
-- Persistencia de las eliminaciones después de recargar la aplicación.
-- Verificación de que al eliminar una tarea no se eliminen otras por error.
-- Pruebas de eliminación de varias tareas.
-- Verificación de que únicamente permanezcan las tareas que no fueron eliminadas.
-- Conservación y adaptación de la funcionalidad para cambiar el estado de las tareas.
-- Creación del método `toggleTaskStatus(taskId)` para cambiar una tarea entre los estados `PORHACER` y `COMPLETADA`.
-- Actualización dinámica del texto del botón entre:
+- Creación del método `createTaskHtml()` para construir tarjetas dinámicamente.
+- Uso de `data-task-id` para relacionar cada tarjeta con su tarea.
+- Creación del botón `Eliminar` dentro de las tarjetas dinámicas.
+- Creación del método `deleteTask(taskId)`.
+- Uso de un arreglo nuevo para conservar las tareas no eliminadas.
+- Actualización del arreglo principal `this.tasks`.
+- Uso de un listener sobre el contenedor `listaTareas`.
+- Uso de `event.target` para identificar el elemento seleccionado.
+- Uso de `classList.contains("delete-button")`.
+- Uso de `closest(".card")` para encontrar la tarjeta.
+- Uso de `dataset.taskId` para recuperar el identificador.
+- Uso de `Number()` para convertir el identificador a número.
+- Creación del método `save()`.
+- Uso de `JSON.stringify()` para convertir las tareas en texto.
+- Almacenamiento de las tareas en `localStorage`.
+- Creación del método `load()`.
+- Uso de `localStorage.getItem()` para recuperar la información.
+- Uso de `JSON.parse()` para reconstruir el arreglo.
+- Recuperación del identificador más alto después de cargar las tareas.
+- Creación del método `render()`.
+- Uso de `innerHTML` para reconstruir la lista de tareas.
+- Persistencia de las tareas después de recargar.
+- Persistencia de las eliminaciones.
+- Conservación del cambio de estado.
+- Pruebas de eliminación individual y de varias tareas.
 
+
+### Tarea 7
+
+En esta tarea se implementó la actualización individual del estado de las tareas creadas dinámicamente.
+
+- Incorporación de la clase `done-button` al botón generado desde `createTaskHtml()`.
+- Conservación temporal de la clase `btn-completar` para mantener los estilos existentes.
+- Conservación del atributo `data-task-id` en cada tarjeta.
+- Creación del método `getTaskById(taskId)` dentro de `TaskManager`.
+- Búsqueda de una tarea mediante su identificador único.
+- Uso de delegación de eventos desde el contenedor `listaTareas`.
+- Identificación del botón mediante:
+
+```js
+event.target.classList.contains("done-button")
+```
+
+- Recuperación de la tarjeta mediante:
+
+```js
+event.target.closest(".card")
+```
+
+- Lectura del identificador almacenado en `data-task-id`.
+- Conversión del identificador mediante `Number()`.
+- Recuperación de la tarea exacta mediante:
+
+```js
+taskManager.getTaskById(taskId)
+```
+
+- Cambio del estado entre:
+  - `PORHACER`.
+  - `COMPLETADA`.
+- Actualización del texto del botón entre:
   - `Marcar como completada`.
   - `Marcar como pendiente`.
+- Guardado del nuevo estado mediante `taskManager.save()`.
+- Actualización de la interfaz mediante `taskManager.render()`.
+- Persistencia del cambio después de recargar la aplicación.
+- Conservación del funcionamiento de `delete-button`.
+- Conservación de la estructura de los objetos de tarea.
+- Conservación de la clave utilizada en `localStorage`.
 
-- Actualización visual del estado mediante clases de Bootstrap.
-- Persistencia del cambio de estado utilizando `save()` y `localStorage`.
-- Recuperación del estado guardado después de recargar la página.
-- Integración de los botones `Marcar como completada` y `Eliminar` dentro de las tarjetas generadas dinámicamente.
-- Organización visual del estado y los botones mediante Flexbox y clases de Bootstrap.
-- Realización de pruebas funcionales para comprobar:
-
-  - Eliminación de una tarea.
-  - Eliminación de varias tareas.
-  - Persistencia después de recargar.
-  - Eliminación únicamente de la tarea seleccionada.
-  - Cambio de estado entre pendiente y completada.
-  - Conservación de las tareas restantes después de eliminar.
-  - Recuperación de las tareas almacenadas después de recargar la aplicación.
+La integración fue comprobada visualmente creando varias tareas y cambiando individualmente el estado de una de ellas. La tarjeta seleccionada cambió a `COMPLETADA`, mientras las demás conservaron el estado `PORHACER`.
 
 
 ## Organización del proyecto
 
-La estructura principal del proyecto se encuentra organizada de la siguiente manera:
+La estructura principal del proyecto se encuentra organizada así:
 
 ```text
 Gen-c13-Planificador-tareas-web/
-
+│
 ├── img/
 │   ├── fondo-inicio.webp
 │   └── logo-lihen.webp
@@ -278,57 +281,67 @@ Actualmente incluye:
 - Formulario de registro.
 - Mensajes de validación.
 - Sección Mis tareas.
-- Contenedor `listaTareas` donde se muestran dinámicamente las tareas.
+- Contenedor `listaTareas`.
 - Estado visual para cuando no existan tareas.
-- Vinculación de los archivos JavaScript del proyecto.
+- Vinculación de los archivos JavaScript.
 
 
 ### `styles.css`
 
 Contiene los estilos personalizados de la aplicación.
 
-Actualmente se utiliza para:
-- Configurar los colores generales de la página.
+Actualmente permite:
+
+- Definir una paleta inspirada en LIHEN mediante variables CSS.
+- Configurar los colores generales.
+- Aplicar un fondo con degradados pastel.
 - Personalizar el encabezado.
 - Configurar el logo.
 - Controlar el ancho del contenido principal.
 - Personalizar la sección Inicio.
-- Utilizar una imagen de fondo en la pantalla inicial.
-- Organizar el formulario de registro.
-- Personalizar campos del formulario.
+- Utilizar una imagen de fondo.
+- Ubicar el mensaje de bienvenida en el costado derecho en escritorio.
+- Evitar que el mensaje cubra el logo central de LIHEN.
+- Devolver el mensaje al centro en pantallas pequeñas.
+- Organizar el formulario.
+- Personalizar los campos y sus estados de foco.
 - Personalizar botones.
 - Configurar la sección Mis tareas.
-- Personalizar las tarjetas.
+- Personalizar tarjetas.
+- Diferenciar los estados `PORHACER` y `COMPLETADA`.
+- Mantener el botón Eliminar como una acción destructiva reconocible.
 - Configurar el estado sin tareas.
-- Complementar los estilos proporcionados por Bootstrap.
+- Complementar los estilos de Bootstrap.
+- Incorporar ajustes controlados para pantallas pequeñas.
 
 
 ### `js/index.js`
 
-Contiene la lógica principal relacionada con la interacción del usuario.
+Contiene la lógica relacionada con la interacción del usuario.
 
 Actualmente permite:
 
-- Seleccionar elementos del HTML mediante JavaScript.
+- Seleccionar elementos del HTML.
 - Capturar la información del formulario.
 - Detectar el evento `submit`.
-- Evitar la recarga automática de la página durante la validación.
+- Evitar la recarga durante la validación.
 - Crear el objeto `datosTarea`.
 - Validar la información ingresada.
-- Mostrar mensajes de error.
-- Mostrar mensajes de éxito.
+- Mostrar mensajes de error y éxito.
 - Crear una instancia de `TaskManager`.
-- Registrar nuevas tareas mediante `addTask()`.
+- Registrar tareas mediante `addTask()`.
 - Guardar las tareas mediante `save()`.
-- Recuperar las tareas guardadas mediante `load()`.
-- Actualizar visualmente la lista mediante `render()`.
-- Escuchar los clics realizados dentro del contenedor `listaTareas`.
+- Recuperar las tareas mediante `load()`.
+- Actualizar la lista mediante `render()`.
+- Escuchar los clics dentro de `listaTareas`.
 - Identificar el botón seleccionado mediante `event.target`.
-- Recuperar el identificador de la tarea mediante `data-task-id`.
+- Detectar `done-button`.
+- Detectar `delete-button`.
+- Recuperar el identificador mediante `data-task-id`.
+- Recuperar una tarea mediante `getTaskById()`.
 - Eliminar tareas mediante `deleteTask()`.
-- Cambiar el estado de las tareas mediante `toggleTaskStatus()`.
-- Mantener sincronizada la interfaz con la información almacenada.
-- Mantener la información después de recargar la aplicación mediante `localStorage`.
+- Cambiar individualmente el estado de las tareas.
+- Mantener sincronizada la interfaz con `localStorage`.
 - Limpiar el formulario después de un registro válido.
 
 
@@ -336,57 +349,105 @@ Actualmente permite:
 
 Contiene la clase `TaskManager`.
 
-Actualmente esta clase permite:
+Actualmente permite:
 
 - Crear un administrador de tareas.
-- Mantener un arreglo de tareas.
-- Mantener un contador de identificadores.
-- Incrementar el identificador de cada nueva tarea.
+- Mantener el arreglo `tasks`.
+- Mantener el contador `currentId`.
+- Incrementar el identificador de cada tarea.
 - Crear tareas como objetos.
 - Asignar identificadores consecutivos.
-- Agregar nuevas tareas al arreglo mediante el método `addTask()`.
-- Construir dinámicamente las tarjetas mediante `createTaskHtml()`.
+- Agregar tareas mediante `addTask()`.
+- Buscar tareas mediante `getTaskById()`.
+- Construir tarjetas mediante `createTaskHtml()`.
+- Incorporar `data-task-id` en cada tarjeta.
+- Incorporar `done-button` al botón de estado.
+- Incorporar `delete-button` al botón Eliminar.
 - Eliminar tareas mediante `deleteTask()`.
-- Cambiar el estado de una tarea mediante `toggleTaskStatus()`.
-- Guardar las tareas en `localStorage` mediante `save()`.
-- Recuperar las tareas almacenadas mediante `load()`.
-- Convertir el arreglo de tareas a texto mediante `JSON.stringify()`.
-- Recuperar los datos mediante `JSON.parse()`.
-- Recuperar el identificador más alto después de recargar la aplicación.
-- Actualizar dinámicamente la interfaz mediante `render()`.
-- Mantener el estado inicial de una nueva tarea como `PORHACER`.
-- Mantener la persistencia de las tareas y sus estados después de recargar la página.
+- Cambiar estados mediante `toggleTaskStatus()`.
+- Guardar información mediante `save()`.
+- Recuperar información mediante `load()`.
+- Actualizar la interfaz mediante `render()`.
+- Mantener el estado inicial `PORHACER`.
+- Mantener la persistencia de las tareas.
+
+
+## 🎨 Paleta visual
+
+El Planificador de Tareas utiliza una identidad visual inspirada en la gama pastel de LIHEN.
+
+La paleta combina rosa pastel, verde lima claro, blanco perla, gris nube, coral suave y dorado cobrizo.
+
+Los colores funcionales se conservan para diferenciar las tareas pendientes, las completadas y la acción de eliminar.
+
+```css
+:root {
+    --color-fondo-perla: #ebe6eb;
+    --color-rosa-lihen: #eeb8e1;
+    --color-verde-lihen: #e2fcb6;
+    --color-coral: #d69275;
+    --color-nube: #bdc1cb;
+    --color-dorado: #a87339;
+    --color-texto: #2b2b2b;
+    --color-texto-suave: #56505a;
+    --color-superficie: #ffffff;
+    --color-superficie-transparente: rgba(255, 255, 255, 0.78);
+    --color-pendiente: #ffc107;
+    --color-completada: #198754;
+    --color-eliminar: #dc3545;
+    --color-foco: #d69275;
+}
+```
+
+Funciones principales:
+
+- `--color-fondo-perla`: fondo general.
+- `--color-rosa-lihen`: identidad y acciones principales.
+- `--color-verde-lihen`: acento visual.
+- `--color-coral`: interacción del botón principal.
+- `--color-nube`: bordes y elementos secundarios.
+- `--color-dorado`: detalles de marca y foco de teclado.
+- `--color-texto`: contenido principal.
+- `--color-texto-suave`: información secundaria.
+- `--color-superficie`: formularios, tarjetas y contenedores.
+- `--color-pendiente`: estado `PORHACER`.
+- `--color-completada`: estado `COMPLETADA`.
+- `--color-eliminar`: acciones destructivas.
+- `--color-foco`: identificación del campo activo.
 
 
 ## Tecnologías
 
-- HTML5
-- CSS3
-- Bootstrap 5
-- JavaScript
-- Git
-- GitHub
-- GitHub Pages
+- HTML5.
+- CSS3.
+- Bootstrap 5.
+- JavaScript.
+- Git.
+- GitHub.
+- GitHub Pages.
 
 
 ## Conceptos trabajados
 
-Durante el desarrollo del proyecto se han aplicado conceptos como:
+Durante el desarrollo del proyecto se aplicaron los siguientes conceptos:
 
 - Estructura semántica con HTML.
 - Formularios HTML.
 - Bootstrap.
 - CSS personalizado.
-- Selectores de CSS.
+- Variables CSS.
+- Selectores CSS.
 - Flexbox.
+- Media queries.
 - Manipulación del DOM.
 - `document.querySelector()`.
 - `document.querySelectorAll()`.
-- Eventos con `addEventListener()`.
+- Eventos mediante `addEventListener()`.
 - Evento `submit`.
 - Evento `click`.
 - `event.preventDefault()`.
 - `event.target`.
+- Delegación de eventos.
 - Funciones.
 - Condicionales.
 - Objetos.
@@ -417,71 +478,65 @@ Durante el desarrollo del proyecto se han aplicado conceptos como:
 - `Number()`.
 - `innerHTML`.
 - Template literals.
-- Interpolación con `${ }`.
-- Renderizado dinámico de contenido.
-- Persistencia de datos en el navegador.
-- Delegación de eventos.
-- Eliminación de elementos mediante identificadores.
-- Cambio y persistencia del estado de las tareas.
+- Interpolación mediante `${ }`.
+- Renderizado dinámico.
+- Persistencia de datos.
+- Búsqueda mediante identificadores.
+- Eliminación individual de tareas.
+- Actualización individual de tareas.
+- Cambio y persistencia de estados.
 
 
 ## Estado del proyecto
 
-Sprint 1 finalizado.
-Sprint 2 finalizado.
+Las funcionalidades correspondientes a las Tareas 1–7 se encuentran integradas en el código local actual.
 
-Actualmente se encuentran implementadas las funcionalidades correspondientes a los Sprint 1 y Sprint 2 del Planificador de Tareas.
+Entre las funcionalidades incorporadas se encuentran:
 
-Entre las funcionalidades implementadas se encuentran:
+- Estructura visual de la aplicación.
+- Navegación entre secciones.
+- Formulario para registrar tareas.
+- Validaciones de campos obligatorios.
+- Validaciones de longitud mínima.
+- Mensajes específicos de error.
+- Mensaje de registro exitoso.
+- Clase `TaskManager`.
+- Arreglo `tasks`.
+- Contador `currentId`.
+- Método `addTask()`.
+- Método `getTaskById()`.
+- Método `createTaskHtml()`.
+- Método `deleteTask()`.
+- Método `toggleTaskStatus()`.
+- Método `save()`.
+- Método `load()`.
+- Método `render()`.
+- Identificadores consecutivos.
+- Estado inicial `PORHACER`.
+- Creación dinámica de tarjetas.
+- Eliminación individual de tareas.
+- Actualización individual del estado.
+- Persistencia mediante `localStorage`.
+- Uso de `done-button`.
+- Uso de `delete-button`.
+- Uso de `data-task-id`.
+- Uso de delegación de eventos.
+- Identidad visual inspirada en LIHEN.
+- Ajustes CSS para diferentes tamaños de pantalla.
 
-- La estructura visual principal de la aplicación.
-- La navegación entre las diferentes secciones.
-- El formulario para registrar tareas.
-- Las validaciones de campos obligatorios.
-- Las validaciones de longitud mínima.
-- Los mensajes específicos de error.
-- El mensaje de registro exitoso.
-- La clase `TaskManager`.
-- El arreglo `tasks`.
-- El contador `currentId`.
-- El método `addTask()`.
-- La creación dinámica de tarjetas mediante `createTaskHtml()`.
-- La creación de objetos de tarea.
-- Los identificadores consecutivos.
-- El estado inicial `PORHACER`.
-- La integración del formulario con `TaskManager`.
-- El registro de tareas únicamente cuando la información es válida.
-- La prevención del registro cuando existen errores de validación.
-- La limpieza automática del formulario después de un registro correcto.
-- El método `deleteTask()` para eliminar tareas.
-- El método `toggleTaskStatus()` para cambiar el estado de una tarea.
-- El método `save()` para almacenar las tareas.
-- El método `load()` para recuperar las tareas almacenadas.
-- El método `render()` para actualizar dinámicamente la interfaz.
-- El uso de `localStorage` para mantener las tareas después de recargar la aplicación.
-- El uso de `JSON.stringify()` y `JSON.parse()` para almacenar y recuperar los datos.
-- La persistencia de las eliminaciones.
-- La persistencia del estado de las tareas.
-- La eliminación exacta de la tarea seleccionada mediante su identificador.
-- La eliminación de varias tareas sin afectar las tareas restantes.
-- El cambio entre los estados `PORHACER` y `COMPLETADA`.
-- La actualización dinámica de los botones de estado.
-- Las pruebas funcionales necesarias para verificar la creación, eliminación, cambio de estado y persistencia de las tareas.
+La implementación de la Tarea 7 y la personalización visual se encuentran en el espacio de trabajo local.
 
-El Sprint 2 se encuentra finalizado con la implementación y validación de la funcionalidad de eliminación de tareas correspondiente a la Tarea 6.
-
-El proyecto continuará ampliándose de acuerdo con las siguientes tareas y requerimientos establecidos durante el Bootcamp Full Stack Java de Generation Colombia.
+Su publicación en GitHub quedará confirmada únicamente después de revisar los cambios, crear el commit y ejecutar el push correspondiente.
 
 
 ## Enlaces del proyecto
-
 
 ### Repositorio GitHub
 
 [Ver repositorio en GitHub](https://github.com/Lizeth-Londono/Gen-c13-Planificador-tareas-web)
 
 
-### Demo - GitHub Pages
+### Demo — GitHub Pages
 
 [Ver aplicación publicada](https://lizeth-londono.github.io/Gen-c13-Planificador-tareas-web/)
 
@@ -498,6 +553,13 @@ El proyecto continuará ampliándose de acuerdo con las siguientes tareas y requ
 
 ## Uso de herramientas de apoyo
 
-Durante el desarrollo del proyecto se utilizaron herramientas de inteligencia artificial como apoyo para comprender conceptos, revisar código, resolver dudas, orientar algunos ajustes de estilos CSS y apoyar la organización y redacción del README.
+Durante el desarrollo del proyecto se utilizaron herramientas de inteligencia artificial como apoyo para:
 
-La estructura, decisiones, implementación, pruebas, adaptación visual y ajustes realizados en el proyecto fueron desarrollados y revisados dentro de mi proceso de aprendizaje durante el Bootcamp Full Stack Java de Generation Colombia.
+- Comprender conceptos.
+- Revisar código.
+- Resolver dudas.
+- Orientar ajustes de estilos CSS.
+- Analizar integraciones.
+- Organizar y redactar la documentación.
+
+La estructura, las decisiones, la implementación, las pruebas, la adaptación visual y los ajustes del proyecto fueron desarrollados y revisados dentro de mi proceso de aprendizaje durante el Bootcamp Full Stack Java de Generation Colombia.

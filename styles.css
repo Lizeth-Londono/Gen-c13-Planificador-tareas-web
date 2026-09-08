@@ -1,550 +1,816 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600&display=swap");
+
 /* ========================================
-   ESTILO GENERAL DE LA PÁGINA
+   PALETA VISUAL DEL PLANIFICADOR LIHEN
    ======================================== */
 
-/* Aquí se define el estilo general de toda la página */
-/* body = representa todo el contenido visible de la página */
+/* :root permite guardar valores reutilizables disponibles en toda la hoja de estilos. */
+:root {
+    /* Define Inter como tipografía principal para lectura, formularios y controles. */
+    --fuente-principal: "Inter", Arial, sans-serif;
+
+    /* Define Poppins como tipografía de títulos y elementos de mayor jerarquía visual. */
+    --fuente-titulos: "Poppins", Arial, sans-serif;
+
+    /* Conserva el tono perla como fondo general y evita utilizar blanco plano en toda la página. */
+    --color-fondo-perla: #ebe6eb;
+
+    /* Representa el rosa pastel principal de la identidad visual LIHEN. */
+    --color-rosa-lihen: #eeb8e1;
+
+    /* Incorpora el acento verde lima suave presente en la referencia visual de LIHEN. */
+    --color-verde-lihen: #e2fcb6;
+
+    /* Aporta un tono coral para los cambios de interacción del botón principal. */
+    --color-coral: #d69275;
+
+    /* Define un gris nube para bordes suaves y elementos secundarios. */
+    --color-nube: #bdc1cb;
+
+    /* Conserva el acento dorado cobrizo del logo para enlaces, bordes y focos. */
+    --color-dorado: #a87339;
+
+    /* Mantiene un tono oscuro que facilita la lectura sobre superficies claras. */
+    --color-texto: #2b2b2b;
+
+    /* Suaviza los textos secundarios sin disminuir demasiado su legibilidad. */
+    --color-texto-suave: #56505a;
+
+    /* Reserva el blanco para formularios, tarjetas y superficies limpias. */
+    --color-superficie: #ffffff;
+
+    /* Crea una superficie blanca translúcida para leer el inicio sin ocultar su imagen. */
+    --color-superficie-transparente: rgba(255, 255, 255, 0.78);
+
+    /* Conserva el amarillo para reconocer visualmente las tareas pendientes. */
+    --color-pendiente: #ffc107;
+
+    /* Conserva un verde oscuro para las tareas completadas y acciones positivas. */
+    --color-completada: #198754;
+
+    /* Mantiene el rojo como señal reconocible de una acción destructiva. */
+    --color-eliminar: #dc3545;
+
+    /* Reutiliza el coral para destacar los campos activos del formulario. */
+    --color-foco: #d69275;
+
+    /* Guarda un borde tenue que integra el dorado sin recargar los contenedores. */
+    --borde-suave: 1px solid rgba(168, 115, 57, 0.18);
+
+    /* Define una sombra amplia y ligera para separar contenido del fondo. */
+    --sombra-suave: 0 8px 24px rgba(43, 43, 43, 0.08);
+
+    /* Define una sombra compacta para distinguir cada tarjeta de tarea. */
+    --sombra-tarjeta: 0 4px 14px rgba(43, 43, 43, 0.10);
+
+    /* Unifica el redondeado pequeño utilizado en campos, alertas y botones. */
+    --radio-pequeno: 8px;
+
+    /* Unifica el redondeado medio utilizado en contenedores y tarjetas. */
+    --radio-medio: 14px;
+
+    /* Define un redondeado amplio para las secciones principales de la interfaz. */
+    --radio-grande: 18px;
+
+    /* Unifica la separación vertical entre las secciones principales. */
+    --separacion-secciones: 24px;
+}
+
+
+/* ========================================
+   ESTILO GENERAL
+   ======================================== */
+
+/* body reúne la apariencia base que se aplica a toda la aplicación. */
 body {
+    /* Evita que la interfaz se comprima por debajo del ancho móvil mínimo. */
+    min-width: 320px;
 
-    /* background-color = define el color de fondo */
-    /* #f7f7f7 = aplica un gris muy claro */
-    background-color: #f7f7f7;
-
-    /* font-family = define el tipo de letra */
-    /* Arial = fuente principal */
-    /* sans-serif = fuente alternativa si Arial no está disponible */
-    font-family: Arial, sans-serif;
-
-    /* margin = controla el espacio exterior */
-    /* 0 = elimina el margen automático del navegador */
+    /* Elimina el margen automático agregado por el navegador. */
     margin: 0;
 
+    /* Combina rosa, verde y perla para formar un fondo claro inspirado en LIHEN. */
+    background:
+        linear-gradient(
+            135deg,
+            rgba(238, 184, 225, 0.28),
+            transparent 36%
+        ),
+        linear-gradient(
+            315deg,
+            rgba(226, 252, 182, 0.34),
+            transparent 40%
+        ),
+        var(--color-fondo-perla);
+
+    /* Aplica el tono oscuro principal a los textos que heredan este color. */
+    color: var(--color-texto);
+
+    /* Utiliza Inter como fuente principal para mantener una lectura limpia y funcional. */
+    font-family: var(--fuente-principal);
 }
 
 
-/* ========================================
-   ENCABEZADO PRINCIPAL
-   ======================================== */
-
-/* Aquí se define el fondo del encabezado principal */
-/* header = representa el encabezado de la página */
-header {
-
-    /* background-color = define el color de fondo */
-    /* #d9a6cf = aplica el tono rosado del encabezado */
-    background-color: #d9a6cf;
-
-}
-
-
-/* Aquí se configura el contenedor interno del encabezado */
-/* header .container = selecciona el contenedor que está dentro del header */
-header .container {
-
-    /* min-height = define una altura mínima */
-    /* 70px = mantiene el encabezado con mínimo 70 píxeles de altura */
-    min-height: 70px;
-
-}
-
-
-/* Aquí se organizan el logo y el nombre de la aplicación */
-/* .logo-marca = clase que agrupa el logo y el nombre */
-.logo-marca {
-
-    /* display = define cómo se organiza el elemento */
-    /* flex = organiza los elementos de forma flexible */
-    display: flex;
-
-    /* align-items = alinea los elementos verticalmente */
-    /* center = los centra verticalmente */
-    align-items: center;
-
-    /* gap = agrega espacio entre los elementos */
-    /* 12px = deja 12 píxeles entre el logo y el nombre */
-    gap: 12px;
-
-}
-
-
-/* Aquí se configura el logo de LIHEN */
-/* .logo-lihen = clase utilizada para la imagen del logo */
-.logo-lihen {
-
-    /* width = define el ancho */
-    /* 60px = establece un ancho de 60 píxeles */
-    width: 60px;
-
-    /* height = define la altura */
-    /* 60px = establece una altura de 60 píxeles */
-    height: 60px;
-
-    /* border-radius = redondea las esquinas */
-    /* 50% = convierte la imagen en un círculo */
-    border-radius: 50%;
-
-    /* object-fit = controla cómo se ajusta la imagen */
-    /* cover = cubre el espacio sin deformar la imagen */
-    object-fit: cover;
-
-    /* display = define cómo se muestra el elemento */
-    /* block = muestra la imagen como un bloque */
-    display: block;
-
-}
-
-
-/* Aquí se configura el nombre de la aplicación dentro del encabezado */
-/* header h1 = selecciona el título principal dentro del header */
-header h1 {
-
-    /* color = define el color del texto */
-    /* #2b2b2b = aplica un tono gris oscuro */
-    color: #2b2b2b;
-
-    /* font-weight = define el grosor de la letra */
-    /* 500 = aplica un grosor medio */
-    font-weight: 500;
-
-    /* margin = controla el espacio exterior */
-    /* 0 = elimina el margen automático */
-    margin: 0;
-
-}
-
-
-/* Aquí se configuran los enlaces del encabezado */
-/* header a = selecciona los enlaces dentro del header */
-header a {
-
-    /* color = define el color del texto */
-    /* #2b2b2b = aplica un tono gris oscuro */
-    color: #2b2b2b;
-
-    /* font-weight = define el grosor de la letra */
-    /* 600 = aplica un grosor seminegrita */
-    font-weight: 600;
-
-}
-
-
-/* Aquí se cambia el color del enlace cuando pasa el mouse */
-/* :hover = aplica estilos cuando el cursor está sobre el elemento */
-header a:hover {
-
-    /* color = define el color del texto */
-    /* #ffffff = cambia el texto a blanco */
-    color: #ffffff;
-
-}
-
-
-/* ========================================
-   CONTENIDO PRINCIPAL
-   ======================================== */
-
-/* Aquí se controla el ancho máximo del contenido principal */
-/* main = representa el contenido principal de la página */
+/* main limita el ancho del contenido sin eliminar el contenedor Bootstrap del HTML. */
 main {
-
-    /* max-width = establece el ancho máximo permitido */
-    /* 960px = limita el contenido a 960 píxeles */
+    /* Evita que las secciones resulten demasiado anchas en escritorio. */
     max-width: 960px;
 
-    /* padding-left = controla el espacio interno del lado izquierdo */
-    /* 0 = elimina el espacio lateral agregado por Bootstrap */
-    /* !important = da prioridad a este valor sobre Bootstrap */
-    padding-left: 0 !important;
-
-    /* padding-right = controla el espacio interno del lado derecho */
-    /* 0 = elimina el espacio lateral agregado por Bootstrap */
+    /* Retira el espacio derecho de Bootstrap para alinear las secciones. */
     padding-right: 0 !important;
 
+    /* Retira el espacio izquierdo de Bootstrap y mantiene la simetría. */
+    padding-left: 0 !important;
 }
 
 
-/* Aquí se mantiene el mismo ancho para las secciones principales */
-/* width = define el ancho del elemento */
-/* 100% = ocupa todo el ancho disponible dentro de main */
-/* box-sizing = controla cómo se calcula el ancho */
-/* border-box = incluye el padding dentro del ancho total */
+/* Este grupo hace que las tres secciones principales compartan el mismo ancho. */
 .seccion-inicio,
 #registrarTarea,
 #misTareas {
-
+    /* Permite que cada sección ocupe todo el ancho disponible dentro de main. */
     width: 100%;
 
+    /* Incluye padding y bordes dentro del ancho para prevenir desbordamientos. */
     box-sizing: border-box;
 
+    /* Suaviza las cuatro esquinas del contenedor principal de tareas. */
+    border-radius: var(--radio-grande);
+
+    /* Mantiene las tarjetas y demás contenido dentro de las curvas del contenedor. */
+    overflow: hidden;
+
+    /* Neutraliza cualquier margen superior externo para igualar la separación entre secciones. */
+    margin-top: 0 !important;
 }
 
 
 /* ========================================
-   PANTALLA INICIO
+   ENCABEZADO Y NAVEGACIÓN
    ======================================== */
 
-/* Aquí se configura la sección principal de Inicio */
-/* .seccion-inicio = clase de la pantalla inicial */
-.seccion-inicio {
+/* header personaliza el encabezado que también utiliza clases de Bootstrap. */
+header {
+    /* Distribuye los colores LIHEN horizontalmente sin utilizar otra imagen. */
+    background: linear-gradient(
+        100deg,
+        var(--color-rosa-lihen),
+        var(--color-fondo-perla) 55%,
+        var(--color-verde-lihen)
+    );
 
-    /* min-height = establece una altura mínima */
-    /* 600px = mantiene la sección con mínimo 600 píxeles de altura */
-    min-height: 600px;
-
-    /* background-image = coloca una imagen como fondo */
-    /* url = indica la ubicación de la imagen */
-    background-image: url("img/fondo-inicio.webp");
-
-    /* background-size = controla el tamaño de la imagen de fondo */
-    /* cover = hace que la imagen cubra toda la sección */
-    background-size: cover;
-
-    /* background-position = define la posición de la imagen */
-    /* calc = permite calcular una posición personalizada */
-    /* 50% + 12px = mueve el fondo ligeramente hacia la derecha */
-    /* 55% = ajusta la posición vertical */
-    background-position: calc(50% + 12px) 55%;
-
-    /* background-repeat = controla si la imagen se repite */
-    /* no-repeat = evita que la imagen se repita */
-    background-repeat: no-repeat;
-
-    /* position = define la forma en que se posiciona el elemento */
-    /* relative = permite posicionar elementos internos tomando esta sección como referencia */
-    position: relative;
-
-    /* display = define cómo se organizan los elementos */
-    /* flex = activa Flexbox */
-    display: flex;
-
-    /* justify-content = alinea los elementos horizontalmente */
-    /* center = los centra horizontalmente */
-    justify-content: center;
-
-    /* align-items = alinea los elementos verticalmente */
-    /* flex-start = los coloca desde la parte superior */
-    align-items: flex-start;
-
-    /* text-align = define la alineación del texto */
-    /* center = centra el texto */
-    text-align: center;
-
-    /* padding-top = agrega espacio interno arriba */
-    /* 25px = deja 25 píxeles de espacio superior */
-    padding-top: 25px;
-
+    /* Reemplaza el borde de Bootstrap por un dorado tenue. */
+    border-color: rgba(168, 115, 57, 0.20) !important;
 }
 
 
-/* Aquí se organiza el contenido principal de Inicio */
-/* .inicio-contenido = bloque donde están el título, mensaje y botón */
-.inicio-contenido {
+/* Este selector organiza el contenedor Bootstrap ubicado dentro del encabezado. */
+header .container {
+    /* Asegura una altura suficiente para que el logo conserve espacio vertical. */
+    min-height: 70px;
 
-    /* display = define cómo se organizan los elementos */
-    /* flex = activa Flexbox */
+    /* Separa el bloque de la marca de la navegación. */
+    gap: 20px;
+}
+
+
+/* .logo-marca agrupa horizontalmente el logo y el nombre de la aplicación. */
+.logo-marca {
+    /* Activa Flexbox para organizar la imagen y el título. */
     display: flex;
 
-    /* flex-direction = define la dirección de los elementos */
-    /* column = coloca los elementos uno debajo del otro */
-    flex-direction: column;
+    /* Evita que el bloque se reduzca cuando la navegación necesita espacio. */
+    flex-shrink: 0;
 
-    /* align-items = alinea los elementos verticalmente */
-    /* center = los centra */
+    /* Centra verticalmente el logo y el título. */
     align-items: center;
 
-    /* gap = agrega espacio entre los elementos */
-    /* 12px = deja 12 píxeles entre ellos */
+    /* Crea una separación constante entre ambos elementos. */
     gap: 12px;
-
-    /* background-color = define el fondo */
-    /* rgba = permite usar transparencia */
-    /* 0.55 = aplica transparencia al fondo blanco */
-    background-color: rgba(255, 255, 255, 0.55);
-
-    /* padding = agrega espacio interno */
-    /* 15px 30px = 15px arriba y abajo, 30px a los lados */
-    padding: 15px 30px;
-
 }
 
 
-/* Aquí se configura el título principal de Inicio */
-/* .inicio-contenido h2 = selecciona el h2 dentro del bloque de Inicio */
-.inicio-contenido h2 {
+/* .logo-lihen controla la imagen de marca incluida en index.html. */
+.logo-lihen {
+    /* Elimina el comportamiento en línea propio de las imágenes. */
+    display: block;
 
-    /* color = define el color del texto */
-    /* #222222 = aplica un gris oscuro */
-    color: #222222;
+    /* Define un ancho proporcionado dentro del encabezado. */
+    width: 60px;
 
-    /* font-size = define el tamaño del texto */
-    /* 32px = establece un tamaño de 32 píxeles */
-    font-size: 32px;
+    /* Iguala la altura con el ancho para conservar una figura cuadrada. */
+    height: 60px;
 
-    /* font-weight = define el grosor de la letra */
-    /* 500 = aplica un grosor medio */
+    /* Añade un contorno dorado suave alrededor del logo. */
+    border: 2px solid rgba(168, 115, 57, 0.42);
+
+    /* Convierte la caja cuadrada en un círculo. */
+    border-radius: 50%;
+
+    /* Recorta la imagen proporcionalmente sin deformarla. */
+    object-fit: cover;
+}
+
+
+/* Este selector ajusta el título principal que está dentro del encabezado. */
+header h1 {
+    /* Utiliza Poppins para reforzar la identidad visual del nombre de la aplicación. */
+    font-family: var(--fuente-titulos);
+
+    /* Elimina márgenes que podrían desalinearlo respecto al logo. */
+    margin: 0;
+
+    /* Mantiene el título con el color principal de lectura. */
+    color: var(--color-texto);
+
+    /* Da presencia al nombre de la aplicación sin usar un grosor excesivo. */
     font-weight: 500;
 
-    /* margin = controla el espacio exterior */
-    /* 0 = elimina el margen automático */
-    margin: 0;
-
+    /* Añade una separación mínima entre letras para suavizar la identidad del encabezado. */
+    letter-spacing: 0.2px;
 }
 
 
-/* Aquí se configura el mensaje debajo del título */
-/* .inicio-contenido p = selecciona el párrafo dentro del bloque de Inicio */
-.inicio-contenido p {
-
-    /* color = define el color del texto */
-    /* #222222 = aplica un gris oscuro */
-    color: #222222;
-
-    /* margin = controla el espacio exterior */
-    /* 0 = elimina el margen automático */
-    margin: 0;
-
-}
-
-
-/* Aquí se configura el botón Nueva tarea */
-/* .inicio-contenido .btn = selecciona el botón dentro del bloque de Inicio */
-.inicio-contenido .btn {
-
-    /* min-width = establece un ancho mínimo */
-    /* 130px = mantiene el botón con mínimo 130 píxeles */
-    min-width: 130px;
-
-    /* position = define cómo se posiciona el elemento */
-    /* absolute = permite ubicar el botón con coordenadas */
-    position: absolute;
-
-    /* left = define la posición desde la izquierda */
-    /* 50% = coloca el botón inicialmente en el centro */
-    left: 50%;
-
-    /* transform = permite mover o transformar un elemento */
-    /* translateX(-50%) = corrige el centro horizontal del botón */
-    transform: translateX(-50%);
-
-    /* top = define la distancia desde la parte superior */
-    /* 390px = coloca el botón a 390 píxeles desde arriba */
-    top: 390px;
-
-}
-
-
-/* ========================================
-   REGISTRAR UNA TAREA
-   ======================================== */
-
-/* Aquí se configura la sección Registrar una tarea */
-/* #registrarTarea = selecciona la sección por su id */
-#registrarTarea {
-
-    /* background-color = define el color de fondo */
-    /* #ffffff = aplica fondo blanco */
-    background-color: #ffffff;
-
-    /* min-height = establece una altura mínima */
-    /* 600px = mantiene la sección con mínimo 600 píxeles */
-    min-height: 600px;
-
-    /* padding = agrega espacio interno */
-    /* 60px = deja 60 píxeles alrededor del contenido */
-    padding: 60px;
-
-    /* display = define cómo se organizan los elementos */
-    /* flex = activa Flexbox */
+/* header nav organiza los tres enlaces principales del proyecto. */
+header nav {
+    /* Activa Flexbox para ubicar los enlaces en una fila. */
     display: flex;
 
-    /* flex-direction = define la dirección de los elementos */
-    /* column = los coloca uno debajo del otro */
+    /* Permite que los enlaces pasen a otra línea cuando disminuye el ancho. */
+    flex-wrap: wrap;
+
+    /* Alinea la navegación hacia el extremo derecho en escritorio. */
+    justify-content: flex-end;
+
+    /* Define la separación vertical y horizontal entre los enlaces. */
+    gap: 8px 18px;
+}
+
+
+/* Este selector conserva una apariencia uniforme en todos los enlaces. */
+header nav a {
+    /* Mantiene Inter en la navegación para conservar claridad y lectura rápida. */
+    font-family: var(--fuente-principal);
+
+    /* Neutraliza el margen me-3 para controlar la separación mediante gap. */
+    margin-right: 0 !important;
+
+    /* Amplía ligeramente el área interactiva del enlace. */
+    padding: 6px 2px;
+
+    /* Usa texto oscuro para leer sobre el degradado claro. */
+    color: var(--color-texto);
+
+    /* Refuerza los enlaces como elementos de navegación. */
+    font-weight: 600;
+
+    /* Separa el subrayado del texto durante la interacción. */
+    text-underline-offset: 5px;
+}
+
+
+/* :hover ofrece una respuesta cuando el puntero pasa sobre un enlace. */
+header nav a:hover {
+    /* Mantiene el texto oscuro durante la interacción. */
+    color: var(--color-texto);
+
+    /* Recupera el subrayado para señalar que el texto es un enlace. */
+    text-decoration: underline !important;
+
+    /* Utiliza el dorado LIHEN como acento del subrayado. */
+    text-decoration-color: var(--color-dorado) !important;
+
+    /* Aumenta el grosor para que la interacción sea visible. */
+    text-decoration-thickness: 2px !important;
+}
+
+
+/* :focus-visible identifica el enlace seleccionado mediante el teclado. */
+header nav a:focus-visible {
+    /* Suaviza las esquinas del contorno de foco. */
+    border-radius: 4px;
+
+    /* Dibuja un contorno visible que no depende solo del cambio de color. */
+    outline: 3px solid var(--color-dorado);
+
+    /* Separa el contorno del texto para facilitar su reconocimiento. */
+    outline-offset: 3px;
+}
+
+
+/* ========================================
+   PANTALLA DE INICIO
+   ======================================== */
+
+/* .seccion-inicio controla la primera pantalla enlazada por la navegación. */
+.seccion-inicio {
+    /* Organiza la franja informativa superior y el banner inferior como zonas independientes. */
+    display: flex;
+
+    /* Coloca primero el contenido informativo y después la imagen. */
     flex-direction: column;
 
-    /* justify-content = alinea el contenido dentro del contenedor */
-    /* center = lo centra verticalmente */
+    /* Conserva el ancho completo disponible dentro de main. */
+    width: 100%;
+
+    /* Elimina espacios internos que puedan separar artificialmente ambas zonas. */
+    padding: 0;
+
+    /* Evita que los elementos internos sobresalgan del ancho de la sección. */
+    overflow: hidden;
+
+    /* Mantiene una base blanca detrás de la franja superior. */
+    background-color: var(--color-superficie);
+
+    /* Centra el contenido textual de la franja informativa. */
+    text-align: center;
+
+    /* Suaviza las esquinas exteriores del bloque principal de inicio. */
+    border-radius: var(--radio-grande);
+
+    /* Separa esta sección de Registrar una tarea con el mismo ritmo vertical del resto. */
+    margin-bottom: var(--separacion-secciones) !important;
+}
+
+
+/* .inicio-contenido organiza el mensaje principal dentro de la franja superior. */
+.inicio-contenido {
+    /* Activa Flexbox para organizar título, mensaje y botón en una sola franja. */
+    display: flex;
+
+    /* Hace que la franja ocupe todo el ancho disponible. */
+    width: 100%;
+
+    /* Fija la altura de escritorio para no superar el espacio marcado en la referencia. */
+    height: 130px;
+
+    /* Impide que otras reglas aumenten la altura de la franja. */
+    min-height: 130px;
+
+    /* Impide que el contenido extienda la franja por encima del límite definido. */
+    max-height: 130px;
+
+    /* Incluye padding y bordes dentro de la altura establecida. */
+    box-sizing: border-box;
+
+    /* Crea espacio interno suficiente sin ampliar la altura total. */
+    padding: 10px 24px;
+
+    /* Mantiene título, mensaje y botón uno debajo del otro. */
+    flex-direction: column;
+
+    /* Centra horizontalmente todos los elementos. */
+    align-items: center;
+
+    /* Centra verticalmente el conjunto dentro de la franja. */
     justify-content: center;
 
+    /* Mantiene una separación compacta entre los tres elementos. */
+    gap: 7px;
+
+    /* Elimina cualquier margen heredado o agregado por clases externas. */
+    margin: 0 !important;
+
+    /* Elimina completamente el fondo de la antigua tarjeta. */
+    background: transparent !important;
+
+    /* Refuerza la eliminación de cualquier color de fondo externo. */
+    background-color: transparent !important;
+
+    /* Elimina el borde de la antigua tarjeta. */
+    border: 0 !important;
+
+    /* Elimina las esquinas redondeadas porque ya no existe una tarjeta. */
+    border-radius: 0 !important;
+
+    /* Elimina cualquier sombra heredada o agregada por Bootstrap. */
+    box-shadow: none !important;
+
+    /* Elimina el desenfoque utilizado cuando el contenido estaba sobre la imagen. */
+    backdrop-filter: none !important;
+}
+
+/* .seccion-inicio::after crea el banner visual inmediatamente debajo de la franja informativa. */
+.seccion-inicio::after {
+    /* Genera una zona independiente para mostrar la imagen. */
+    content: "";
+
+    /* Convierte el pseudoelemento en un bloque visible. */
+    display: block;
+
+    /* Hace que el banner ocupe todo el ancho de la sección. */
+    width: 100%;
+
+    /* Mantiene una altura amplia para la imagen principal. */
+    height: 430px;
+
+    /* Evita que el banner se comprima dentro del contenedor Flexbox. */
+    flex-shrink: 0;
+
+    /* Utiliza la imagen principal almacenada en la carpeta img. */
+    background-image: url("img/fondo-inicio.webp");
+
+    /* Ajusta el encuadre para conservar visible la composición principal. */
+    background-position: center 55%;
+
+    /* Evita que la imagen se repita. */
+    background-repeat: no-repeat;
+
+    /* Hace que la imagen cubra el banner conservando su proporción. */
+    background-size: cover;
 }
 
 
-/* Aquí se configura el título Registrar una tarea */
-/* #registrarTarea h2 = selecciona el título dentro de esta sección */
-#registrarTarea h2 {
+/* Este selector personaliza el título ubicado en el contenido de inicio. */
+.inicio-contenido h2 {
+    /* Utiliza Poppins para diferenciar el título principal del texto funcional. */
+    font-family: var(--fuente-titulos);
 
-    /* text-align = alinea el texto */
-    /* center = centra el texto */
-    text-align: center;
+    /* Elimina márgenes de Bootstrap o del navegador para controlar la altura real. */
+    margin: 0 !important;
 
-    /* color = define el color del texto */
-    /* #222222 = aplica un gris oscuro */
-    color: #222222;
+    /* Mantiene el color principal de lectura. */
+    color: var(--color-texto);
 
-    /* font-weight = define el grosor de la letra */
-    /* 500 = aplica un grosor medio */
+    /* Conserva una jerarquía visible sin ocupar demasiado espacio vertical. */
+    font-size: clamp(1.45rem, 2.3vw, 1.8rem);
+
+    /* Resalta el mensaje principal de la aplicación. */
     font-weight: 500;
 
-    /* margin-bottom = agrega espacio debajo */
-    /* 35px = deja 35 píxeles de separación inferior */
-    margin-bottom: 35px;
+    /* Reduce el espacio vertical interno del título. */
+    line-height: 1.05;
+}
 
+
+/* Este selector controla el mensaje breve ubicado debajo del título. */
+.inicio-contenido p {
+    /* Conserva Inter en el texto descriptivo por su legibilidad. */
+    font-family: var(--fuente-principal);
+
+    /* Elimina márgenes para evitar que el texto aumente la altura de la franja. */
+    margin: 0 !important;
+
+    /* Mantiene el mensaje con el color principal de lectura. */
+    color: var(--color-texto);
+
+    /* Conserva el texto en una medida legible y compacta. */
+    font-size: 0.95rem;
+
+    /* Mantiene una altura de línea reducida pero cómoda. */
+    line-height: 1.2;
+}
+
+
+/* Este selector ajusta el botón Bootstrap de la pantalla de inicio. */
+.inicio-contenido .btn {
+    /* Mantiene Inter en los botones para que las acciones sean fáciles de identificar. */
+    font-family: var(--fuente-principal);
+
+    /* Mantiene un ancho cómodo para identificar la acción principal. */
+    min-width: 140px;
+
+    /* Reduce ligeramente la altura para mantener todo dentro de la franja. */
+    min-height: 38px;
+
+    /* Elimina cualquier margen exterior que pueda desplazar el botón. */
+    margin: 0 !important;
+
+    /* Mantiene un espacio interno vertical compacto. */
+    padding-top: 7px;
+
+    /* Mantiene un espacio interno inferior simétrico. */
+    padding-bottom: 7px;
+
+    /* Evita que el botón se comprima horizontalmente. */
+    flex-shrink: 0;
 }
 
 
 /* ========================================
-   CAMPOS DEL FORMULARIO
+   FORMULARIO
    ======================================== */
 
-/* Aquí se configuran los campos y listas del formulario */
-/* .form-control = campos de texto de Bootstrap */
-/* .form-select = listas desplegables de Bootstrap */
-.form-control,
-.form-select {
+/* #registrarTarea personaliza la sección identificada con ese id en el HTML. */
+#registrarTarea {
+    /* Activa Flexbox para organizar y centrar el formulario. */
+    display: flex;
 
-    /* border-radius = controla el redondeo de las esquinas */
-    /* 0 = deja las esquinas rectas */
-    border-radius: 0;
-
-}
-
-
-/* Aquí se configura el campo cuando está seleccionado */
-/* :focus = se activa cuando el usuario selecciona el campo */
-.form-control:focus,
-.form-select:focus {
-
-    /* border-color = define el color del borde */
-    /* #c98fc1 = aplica el tono rosado */
-    border-color: #c98fc1;
-
-    /* box-shadow = agrega una sombra alrededor del campo */
-    /* rgba = permite aplicar transparencia al color */
-    box-shadow: 0 0 0 3px rgba(201, 143, 193, 0.20);
-
-}
-
-
-/* ========================================
-   BOTONES PRINCIPALES
-   ======================================== */
-
-/* Aquí se configura el botón principal */
-/* .btn-primary = clase principal de botones de Bootstrap */
-.btn-primary {
-
-    /* background-color = define el color de fondo */
-    /* #c98fc1 = aplica el tono rosado */
-    background-color: #c98fc1;
-
-    /* border-color = define el color del borde */
-    /* #c98fc1 = mantiene el borde del mismo tono */
-    border-color: #c98fc1;
-
-    /* border-radius = controla el redondeo */
-    /* 0 = deja las esquinas rectas */
-    border-radius: 0;
-
-}
-
-
-/* Aquí se cambia el botón cuando pasa el mouse */
-/* :hover = aplica estilos cuando el cursor está sobre el botón */
-.btn-primary:hover {
-
-    /* background-color = cambia el color de fondo */
-    /* #b97daf = aplica un rosado más oscuro */
-    background-color: #b97daf;
-
-    /* border-color = cambia el color del borde */
-    /* #b97daf = mantiene el borde con el mismo tono */
-    border-color: #b97daf;
-
-}
-
-
-/* ========================================
-   SECCIÓN MIS TAREAS
-   ======================================== */
-
-/* Aquí se configura la sección Mis tareas */
-/* #misTareas = selecciona la sección por su id */
-#misTareas {
-
-    /* background-color = define el color de fondo */
-    /* #ffffff = aplica fondo blanco */
-    background-color: #ffffff;
-
-    /* min-height = establece una altura mínima */
-    /* 600px = mantiene la sección con mínimo 600 píxeles */
+    /* Conserva una altura semejante a la pantalla de inicio en escritorio. */
     min-height: 600px;
 
-    /* padding = agrega espacio interno */
-    /* 60px 40px = 60px arriba y abajo, 40px a los lados */
-    padding: 60px 40px;
+    /* Crea espacio alrededor del formulario en pantallas grandes. */
+    padding: 60px;
 
+    /* Organiza el contenido de la sección en dirección vertical. */
+    flex-direction: column;
+
+    /* Centra el formulario dentro de la altura disponible. */
+    justify-content: center;
+
+    /* Utiliza blanco para separar el formulario del fondo general. */
+    background-color: var(--color-superficie);
+
+    /* Suaviza las cuatro esquinas de la sección del formulario. */
+    border-radius: var(--radio-grande);
+
+    /* Mantiene el contenido dentro de las esquinas redondeadas. */
+    overflow: hidden;
+
+    /* Mantiene la misma separación antes de la sección Mis tareas. */
+    margin-bottom: var(--separacion-secciones) !important;
+
+    /* Evita que clases externas agreguen separación adicional antes del formulario. */
+    margin-top: 0 !important;
 }
 
 
-/* Aquí se configura el título Mis tareas */
-/* #misTareas h2 = selecciona el título dentro de esta sección */
+/* Este grupo comparte la apariencia de los títulos de las dos secciones. */
+#registrarTarea h2,
 #misTareas h2 {
+    /* Utiliza Poppins para dar una jerarquía visual común a los títulos de sección. */
+    font-family: var(--fuente-titulos);
 
-    /* text-align = alinea el texto */
-    /* center = centra el texto */
-    text-align: center;
+    /* Aplica el color principal de lectura. */
+    color: var(--color-texto);
 
-    /* color = define el color del texto */
-    /* #222222 = aplica un gris oscuro */
-    color: #222222;
-
-    /* font-weight = define el grosor de la letra */
-    /* 500 = aplica un grosor medio */
+    /* Resalta la jerarquía de ambos títulos. */
     font-weight: 500;
 
-    /* margin-bottom = agrega espacio debajo del elemento */
-    /* 40px = deja 40 píxeles de separación inferior */
-    margin-bottom: 40px;
+    /* Centra los títulos dentro de sus secciones. */
+    text-align: center;
+}
 
+
+/* Este selector controla el espacio inferior del título del formulario. */
+#registrarTarea h2 {
+    /* Separa el título de los mensajes y campos ubicados debajo. */
+    margin-bottom: 35px;
+}
+
+
+/* .form-label complementa las etiquetas de Bootstrap. */
+.form-label {
+    /* Mantiene Inter en las etiquetas para una lectura clara del formulario. */
+    font-family: var(--fuente-principal);
+
+    /* Mantiene las etiquetas legibles sobre el fondo blanco. */
+    color: var(--color-texto);
+
+    /* Diferencia cada etiqueta del valor escrito en el campo. */
+    font-weight: 600;
+}
+
+
+/* Este grupo aplica una apariencia común a inputs y listas desplegables. */
+.form-control,
+.form-select {
+    /* Conserva Inter dentro de los controles para mantener uniformidad funcional. */
+    font-family: var(--fuente-principal);
+
+    /* Conserva una altura cómoda para ratón, teclado o pantalla táctil. */
+    min-height: 44px;
+
+    /* Aplica el color principal al valor escrito o seleccionado. */
+    color: var(--color-texto);
+
+    /* Mantiene una superficie blanca dentro de los campos. */
+    background-color: var(--color-superficie);
+
+    /* Utiliza el gris nube para delimitar los controles. */
+    border-color: var(--color-nube);
+
+    /* Redondea los campos de manera coherente con los botones. */
+    border-radius: var(--radio-pequeno);
+}
+
+
+/* Este selector proporciona más espacio vertical al campo de descripción. */
+textarea.form-control {
+    /* Permite visualizar inicialmente varias líneas de texto. */
+    min-height: 96px;
+}
+
+
+/* Este grupo muestra cuál campo está activo. */
+.form-control:focus,
+.form-select:focus {
+    /* Cambia el borde al color destinado al foco. */
+    border-color: var(--color-foco);
+
+    /* Añade un halo para que el foco no dependa solamente del borde. */
+    box-shadow: 0 0 0 4px rgba(214, 146, 117, 0.28);
+}
+
+
+/* .alert conserva el comportamiento de los mensajes Bootstrap. */
+.alert {
+    /* Integra las alertas con las esquinas suaves de la interfaz. */
+    border-radius: var(--radio-pequeno);
 }
 
 
 /* ========================================
-   TARJETAS DE TAREAS
+   BOTONES
    ======================================== */
 
-/* Aquí se configura el diseño de las tarjetas */
-/* .card = clase de Bootstrap utilizada para crear tarjetas */
-.card {
+/* .btn complementa la clase base de todos los botones Bootstrap. */
+.btn {
+    /* Mantiene una altura uniforme y cómoda para seleccionar las acciones. */
+    min-height: 44px;
 
-    /* border = controla el borde */
-    /* none = elimina el borde normal */
-    border: none;
+    /* Aplica el redondeado utilizado por los controles interactivos. */
+    border-radius: var(--radio-pequeno);
 
-    /* border-left = agrega un borde solo al lado izquierdo */
-    /* 5px = define el grosor */
-    /* solid = crea una línea continua */
-    /* #c98fc1 = aplica el tono rosado */
-    border-left: 5px solid #c98fc1;
-
-    /* border-radius = redondea las esquinas */
-    /* 10px = aplica un redondeo de 10 píxeles */
-    border-radius: 10px;
-
-    /* box-shadow = agrega una sombra alrededor de la tarjeta */
-    /* rgba = permite utilizar transparencia */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-
+    /* Refuerza el texto para identificar claramente cada acción. */
+    font-weight: 600;
 }
 
 
-/* Aquí se configura el contenido interno de cada tarjeta */
-/* .card-body = contiene la información de la tarjeta */
+/* .btn-primary identifica las acciones principales del Planificador. */
+.btn-primary {
+    /* Utiliza texto oscuro porque el fondo rosa es claro. */
+    color: var(--color-texto);
+
+    /* Aplica el rosa LIHEN como fondo de la acción principal. */
+    background-color: var(--color-rosa-lihen);
+
+    /* Iguala el borde con el fondo para evitar colores ajenos a la paleta. */
+    border-color: var(--color-rosa-lihen);
+}
+
+
+/* Este grupo mantiene una respuesta común al interactuar con el botón principal. */
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:first-child:active {
+    /* Conserva el texto oscuro durante la interacción. */
+    color: var(--color-texto);
+
+    /* Cambia temporalmente el rosa por coral para mostrar respuesta. */
+    background-color: var(--color-coral);
+
+    /* Mantiene el borde unido al nuevo fondo. */
+    border-color: var(--color-coral);
+}
+
+
+/* Este grupo muestra un foco visible en los botones utilizados por el proyecto. */
+.btn-primary:focus-visible,
+.btn-success:focus-visible,
+.btn-danger:focus-visible {
+    /* Añade un contorno dorado para identificar el botón activo por teclado. */
+    outline: 3px solid var(--color-dorado);
+
+    /* Separa el contorno del borde del botón. */
+    outline-offset: 3px;
+
+    /* Retira la sombra Bootstrap para que no compita con el contorno. */
+    box-shadow: none;
+}
+
+
+/* .btn-success conserva el significado positivo de done-button y btn-completar. */
+.btn-success {
+    /* Utiliza texto blanco sobre el fondo verde oscuro. */
+    color: var(--color-superficie);
+
+    /* Aplica el verde asociado con el estado completado. */
+    background-color: var(--color-completada);
+
+    /* Mantiene el borde con el mismo verde. */
+    border-color: var(--color-completada);
+}
+
+
+/* .btn-danger conserva la señal destructiva del botón delete-button. */
+.btn-danger {
+    /* Utiliza blanco para leer claramente la palabra Eliminar. */
+    color: var(--color-superficie);
+
+    /* Mantiene el rojo como fondo de la acción destructiva. */
+    background-color: var(--color-eliminar);
+
+    /* Iguala el borde con el fondo rojo. */
+    border-color: var(--color-eliminar);
+}
+
+
+/* ========================================
+   LISTA Y TARJETAS DE TAREAS
+   ======================================== */
+
+/* #misTareas controla la sección donde JavaScript muestra las tarjetas. */
+#misTareas {
+    /* Conserva una altura amplia cuando existen pocas tareas. */
+    min-height: 600px;
+
+    /* Separa la lista de los bordes de la sección. */
+    padding: 60px 40px;
+
+    /* Mantiene una superficie blanca detrás de las tarjetas. */
+    background-color: var(--color-superficie);
+}
+
+
+/* Este selector separa el título Mis tareas de la primera tarjeta. */
+#misTareas h2 {
+    /* Crea espacio antes del contenido generado dinámicamente. */
+    margin-bottom: 40px;
+}
+
+
+/* .card complementa cada tarjeta creada mediante createTaskHtml(). */
+.card {
+    /* Impide que el contenido sobresalga de las esquinas redondeadas. */
+    overflow: hidden;
+
+    /* Delimita cada tarea con el borde reutilizable. */
+    border: var(--borde-suave);
+
+    /* Añade una franja rosa para identificar visualmente cada tarjeta. */
+    border-left: 5px solid var(--color-rosa-lihen);
+
+    /* Suaviza las esquinas de la tarjeta. */
+    border-radius: var(--radio-medio);
+
+    /* Separa la tarjeta del fondo sin utilizar un borde pesado. */
+    box-shadow: var(--sombra-tarjeta);
+}
+
+
+/* .card-body controla el espacio interno de cada tarjeta. */
 .card-body {
-
-    /* padding = agrega espacio interno */
-    /* 20px = deja 20 píxeles alrededor del contenido */
+    /* Separa el contenido de los bordes de la tarjeta. */
     padding: 20px;
+}
 
+
+/* Este grupo permite que títulos y textos extensos se ajusten. */
+.card-title,
+.card-text {
+    /* Mantiene Inter en la información secundaria de cada tarea. */
+    font-family: var(--fuente-principal);
+
+    /* Autoriza cortes en palabras largas para prevenir desbordamientos. */
+    overflow-wrap: anywhere;
+}
+
+
+/* .card-title personaliza el nombre principal de cada tarea. */
+.card-title {
+    /* Utiliza Poppins para destacar el nombre de cada tarea. */
+    font-family: var(--fuente-titulos);
+
+    /* Mantiene el título con el color principal de lectura. */
+    color: var(--color-texto);
+
+    /* Diferencia el nombre de la información secundaria. */
+    font-weight: 600;
+}
+
+
+/* .card-text personaliza la descripción y fecha de la tarea. */
+.card-text {
+    /* Usa un tono secundario para crear jerarquía visual. */
+    color: var(--color-texto-suave);
+}
+
+
+/* Este selector controla la fila que contiene estado y acciones. */
+.card-body > .d-flex {
+    /* Separa la insignia del grupo de botones. */
+    gap: 16px;
+}
+
+
+/* Este selector controla específicamente el grupo de botones. */
+.card-body .d-flex.gap-2 {
+    /* Permite que los botones cambien de línea cuando no existe espacio. */
+    flex-wrap: wrap;
+
+    /* Mantiene las acciones alineadas a la derecha en escritorio. */
+    justify-content: flex-end;
+}
+
+
+/* Esta regla personaliza la insignia del estado PORHACER. */
+.badge.text-bg-warning {
+    /* Usa texto oscuro porque el fondo amarillo es claro. */
+    color: var(--color-texto) !important;
+
+    /* Conserva el amarillo como señal de una tarea pendiente. */
+    background-color: var(--color-pendiente) !important;
+}
+
+
+/* Esta regla personaliza la insignia del estado COMPLETADA. */
+.badge.text-bg-success {
+    /* Usa texto blanco sobre el verde oscuro. */
+    color: var(--color-superficie) !important;
+
+    /* Conserva el verde como señal de una tarea finalizada. */
+    background-color: var(--color-completada) !important;
 }
 
 
@@ -552,137 +818,301 @@ main {
    ESTADO SIN TAREAS
    ======================================== */
 
-/*
-   Aquí se mantiene oculto temporalmente el estado sin tareas.
-   Por ahora existen cinco tarjetas de ejemplo.
-   Más adelante JavaScript podrá decidir cuándo mostrarlo.
-*/
-
-/* Aquí se configura el bloque que se utilizará cuando no existan tareas */
-/* .sin-tareas = clase del estado sin tareas */
+/* .sin-tareas representa el contenido alternativo de una lista vacía. */
 .sin-tareas {
-
-    /* display = define cómo se muestra el elemento */
-    /* none = mantiene el elemento oculto */
+    /* Mantiene oculto el bloque hasta que la lógica decida mostrarlo. */
     display: none;
 
-    /* text-align = alinea el texto */
-    /* center = centra el contenido */
-    text-align: center;
-
-    /* padding = agrega espacio interno */
-    /* 20px 0 40px = 20px arriba, 0 a los lados y 40px abajo */
+    /* Reserva espacio vertical para cuando llegue a mostrarse. */
     padding: 20px 0 40px;
 
+    /* Centra el mensaje y sus elementos visuales. */
+    text-align: center;
 }
 
 
-/* Aquí se configura el título del estado sin tareas */
-/* .sin-tareas h3 = selecciona el título dentro del bloque */
+/* Este selector personaliza el título del estado vacío. */
 .sin-tareas h3 {
+    /* Utiliza Poppins para conservar la jerarquía visual del estado vacío. */
+    font-family: var(--fuente-titulos);
 
-    /* color = define el color del texto */
-    /* #222222 = aplica un gris oscuro */
-    color: #222222;
-
-    /* font-size = define el tamaño del texto */
-    /* 28px = establece un tamaño de 28 píxeles */
-    font-size: 28px;
-
-    /* font-weight = define el grosor de la letra */
-    /* 500 = aplica un grosor medio */
-    font-weight: 500;
-
-    /* margin-bottom = agrega espacio debajo */
-    /* 35px = deja 35 píxeles de separación inferior */
+    /* Separa el título del contenido ubicado debajo. */
     margin-bottom: 35px;
 
+    /* Mantiene el título con el color principal. */
+    color: var(--color-texto);
+
+    /* Adapta el tamaño sin producir cambios bruscos. */
+    font-size: clamp(1.5rem, 5vw, 1.75rem);
+
+    /* Resalta el mensaje principal del estado vacío. */
+    font-weight: 600;
 }
 
 
-/* Aquí se configura el bloque rosado central */
-/* .sin-tareas-contenido = contenedor central del estado sin tareas */
+/* .sin-tareas-contenido crea el bloque visual central del estado vacío. */
 .sin-tareas-contenido {
-
-    /* background-color = define el color de fondo */
-    /* #d9a6cf = aplica el tono rosado */
-    background-color: #d9a6cf;
-
-    /* min-height = establece una altura mínima */
-    /* 300px = mantiene el bloque con mínimo 300 píxeles */
-    min-height: 300px;
-
-    /* display = define cómo se organizan los elementos */
-    /* flex = activa Flexbox */
+    /* Activa Flexbox para organizar el icono y el mensaje. */
     display: flex;
 
-    /* flex-direction = define la dirección de los elementos */
-    /* column = los coloca uno debajo del otro */
-    flex-direction: column;
+    /* Reserva altura suficiente para que el estado resulte visible. */
+    min-height: 300px;
 
-    /* justify-content = alinea los elementos en el eje principal */
-    /* center = los centra */
-    justify-content: center;
-
-    /* align-items = alinea los elementos en el eje contrario */
-    /* center = los centra */
-    align-items: center;
-
-    /* margin-bottom = agrega espacio debajo */
-    /* 30px = deja 30 píxeles de separación inferior */
+    /* Separa el bloque del botón principal inferior. */
     margin-bottom: 30px;
 
+    /* Crea espacio interno alrededor de sus elementos. */
+    padding: 24px;
+
+    /* Organiza el icono y el texto en dirección vertical. */
+    flex-direction: column;
+
+    /* Centra horizontalmente sus elementos. */
+    align-items: center;
+
+    /* Centra verticalmente el contenido. */
+    justify-content: center;
+
+    /* Combina rosa y verde para conservar la identidad LIHEN. */
+    background: linear-gradient(
+        135deg,
+        var(--color-rosa-lihen),
+        var(--color-verde-lihen)
+    );
+
+    /* Redondea el bloque de manera coherente con las tarjetas. */
+    border-radius: var(--radio-medio);
 }
 
 
-/* Aquí se configura el círculo decorativo */
-/* .sin-tareas-icono = elemento decorativo del estado sin tareas */
+/* .sin-tareas-icono crea la figura decorativa del estado vacío. */
 .sin-tareas-icono {
-
-    /* width = define el ancho */
-    /* 90px = establece un ancho de 90 píxeles */
+    /* Define el ancho antes de convertir la figura en círculo. */
     width: 90px;
 
-    /* height = define la altura */
-    /* 90px = establece una altura de 90 píxeles */
+    /* Iguala la altura con el ancho para conservar su proporción. */
     height: 90px;
 
-    /* background-color = define el color de fondo */
-    /* #dddddd = aplica un gris claro */
-    background-color: #dddddd;
-
-    /* border-radius = redondea las esquinas */
-    /* 50% = convierte el elemento en un círculo */
-    border-radius: 50%;
-
-    /* margin-bottom = agrega espacio debajo */
-    /* 20px = deja 20 píxeles de separación inferior */
+    /* Separa la figura del mensaje inferior. */
     margin-bottom: 20px;
 
+    /* Utiliza el gris nube como color interior. */
+    background-color: var(--color-nube);
+
+    /* Separa visualmente el círculo del degradado. */
+    border: 3px solid var(--color-superficie);
+
+    /* Convierte la caja cuadrada en una figura circular. */
+    border-radius: 50%;
 }
 
 
-/* Aquí se configura el mensaje del estado sin tareas */
-/* .sin-tareas-contenido p = selecciona el párrafo dentro del bloque */
+/* Este selector controla el mensaje del estado vacío. */
 .sin-tareas-contenido p {
+    /* Conserva Inter para el mensaje descriptivo del estado vacío. */
+    font-family: var(--fuente-principal);
 
-    /* color = define el color del texto */
-    /* #222222 = aplica un gris oscuro */
-    color: #222222;
-
-    /* margin = controla el espacio exterior */
-    /* 0 = elimina el margen automático */
+    /* Elimina el margen para conservar el centrado previsto. */
     margin: 0;
 
+    /* Utiliza texto oscuro sobre el degradado claro. */
+    color: var(--color-texto);
+
+    /* Destaca el mensaje sin competir con el título. */
+    font-weight: 600;
 }
 
 
-/* Aquí se configura el botón Agregar tarea */
-/* .sin-tareas .btn-primary = selecciona el botón principal dentro del estado sin tareas */
+/* Este selector mantiene una medida cómoda para el botón del estado vacío. */
 .sin-tareas .btn-primary {
+    /* Evita que el botón resulte demasiado estrecho. */
+    min-width: 140px;
+}
 
-    /* min-width = establece un ancho mínimo */
-    /* 130px = mantiene el botón con mínimo 130 píxeles */
-    min-width: 130px;
 
+/* ========================================
+   ADAPTACIÓN RESPONSIVE
+   ======================================== */
+
+/* Esta media query reorganiza la interfaz cuando el ancho es menor de 768 px. */
+@media (max-width: 767.98px) {
+    /* El encabezado necesita distribuirse en varias filas. */
+    header .container {
+        /* Coloca la marca encima de la navegación. */
+        flex-direction: column;
+
+        /* Alinea el contenido al inicio y reemplaza la clase Bootstrap. */
+        align-items: flex-start !important;
+    }
+
+    /* La navegación utiliza todo el ancho disponible. */
+    header nav {
+        /* Permite que los enlaces aprovechen el ancho del encabezado. */
+        width: 100%;
+
+        /* Mueve los enlaces hacia el inicio. */
+        justify-content: flex-start;
+    }
+
+    /* main reduce el espacio vertical de py-5 en pantallas pequeñas. */
+    main {
+        /* Conserva separación en la parte superior. */
+        padding-top: 24px !important;
+
+        /* Conserva separación en la parte inferior. */
+        padding-bottom: 24px !important;
+    }
+
+    /* La sección de inicio conserva separadas la franja informativa y la imagen. */
+    .seccion-inicio {
+        /* Permite que la altura total responda a sus dos zonas internas. */
+        min-height: auto;
+    }
+
+    /* En pantallas pequeñas la franja mantiene los elementos apilados y centrados. */
+    .inicio-contenido {
+        /* Permite una altura ligeramente mayor para evitar compresión del contenido. */
+        height: 145px;
+
+        /* Mantiene la misma altura mínima que la altura definida. */
+        min-height: 145px;
+
+        /* Impide que la franja crezca más de lo necesario. */
+        max-height: 145px;
+
+        /* Reduce el espacio interior para aprovechar mejor el ancho móvil. */
+        padding: 12px 18px;
+
+        /* Mantiene la distribución vertical. */
+        flex-direction: column;
+
+        /* Reduce la separación entre elementos. */
+        gap: 7px;
+    }
+
+    /* El banner conserva una altura proporcionada en tabletas y móviles. */
+    .seccion-inicio::after {
+        /* Reduce la altura del banner en pantallas pequeñas. */
+        height: 300px;
+
+        /* Centra el encuadre al cambiar la proporción de pantalla. */
+        background-position: center;
+    }
+
+    /* Este grupo adapta las secciones de formulario y tareas. */
+    #registrarTarea,
+    #misTareas {
+        /* Permite que la altura responda a su contenido. */
+        min-height: auto;
+
+        /* Reduce el espacio sin pegar el contenido a los bordes. */
+        padding: 40px 24px;
+    }
+
+    /* La fila de estado y acciones cambia de horizontal a vertical. */
+    .card-body > .d-flex {
+        /* Coloca la insignia encima del grupo de botones. */
+        flex-direction: column;
+
+        /* Alinea los elementos al inicio. */
+        align-items: flex-start !important;
+    }
+
+    /* El grupo de botones se adapta al flujo vertical. */
+    .card-body .d-flex.gap-2 {
+        /* Permite que las acciones ocupen todo el ancho. */
+        width: 100%;
+
+        /* Alinea los botones al inicio de la tarjeta. */
+        justify-content: flex-start;
+    }
+}
+
+
+/* Esta media query ajusta los móviles con menos de 400 px de ancho. */
+@media (max-width: 399.98px) {
+    /* El logo se reduce para dejar más espacio al nombre. */
+    .logo-lihen {
+        /* Reduce el ancho sin perder la figura circular. */
+        width: 52px;
+
+        /* Conserva la misma medida vertical. */
+        height: 52px;
+    }
+
+    /* La navegación cambia a una columna. */
+    header nav {
+        /* Coloca cada enlace en una línea independiente. */
+        flex-direction: column;
+
+        /* Reduce la separación vertical entre enlaces. */
+        gap: 2px;
+    }
+
+    /* La pantalla de inicio conserva su estructura separada en móviles estrechos. */
+    .seccion-inicio {
+        /* Permite que la altura dependa de la franja y del banner. */
+        min-height: auto;
+    }
+
+    /* El bloque de bienvenida conserva una franja compacta. */
+    .inicio-contenido {
+        /* Ajusta la altura para que el contenido siga siendo legible. */
+        height: 150px;
+
+        /* Mantiene el límite inferior definido para este tamaño. */
+        min-height: 150px;
+
+        /* Evita que clases externas amplíen la franja. */
+        max-height: 150px;
+
+        /* Conserva separación suficiente alrededor del contenido. */
+        padding: 12px 14px;
+    }
+
+    /* El banner reduce su altura en pantallas de menos de 400 px. */
+    .seccion-inicio::after {
+        /* Mantiene una proporción adecuada para móviles estrechos. */
+        height: 240px;
+    }
+
+    /* Este grupo adapta las secciones al ancho aproximado de 320 px. */
+    #registrarTarea,
+    #misTareas {
+        /* Conserva 16 px de espacio horizontal a cada lado. */
+        padding: 32px 16px;
+    }
+
+    /* El contenido de las tarjetas utiliza menos espacio. */
+    .card-body {
+        /* Mantiene una separación interna de 16 px. */
+        padding: 16px;
+    }
+
+    /* Los botones se expanden dentro del grupo de acciones. */
+    .card-body .d-flex.gap-2 .btn {
+        /* Hace que cada botón use una fila completa. */
+        width: 100%;
+    }
+}
+
+
+/* Esta media query respeta la preferencia del sistema de reducir movimiento. */
+@media (prefers-reduced-motion: reduce) {
+    /* El selector universal también cubre los pseudoelementos. */
+    *,
+    *::before,
+    *::after {
+        /* Evita desplazamientos suaves cuando se solicita menos movimiento. */
+        scroll-behavior: auto !important;
+
+        /* Reduce casi completamente la duración de las transiciones. */
+        transition-duration: 0.01ms !important;
+
+        /* Reduce casi completamente la duración de las animaciones. */
+        animation-duration: 0.01ms !important;
+
+        /* Evita que una animación se repita continuamente. */
+        animation-iteration-count: 1 !important;
+    }
 }

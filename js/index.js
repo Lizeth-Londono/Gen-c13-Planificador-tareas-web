@@ -250,100 +250,65 @@ console.log(taskManager.tasks);
 // event = guarda la información del elemento sobre el que se hizo clic
 listaTareas.addEventListener("click", function (event) {
 
-    // Aquí se verifica si el elemento presionado es el botón para eliminar una tarea
-    // event.target = representa el elemento exacto sobre el que se hizo clic
-    // classList = permite trabajar con las clases del elemento
-    // contains = verifica si existe una clase
-    // delete-button = clase utilizada para identificar el botón Eliminar
-    if (event.target.classList.contains("delete-button")) {
+    // Recupera la tarea correspondiente cuando se presiona el botón para completarla.
+    if (event.target.classList.contains("done-button")) {
 
-        // Aquí se busca la tarjeta que contiene el botón presionado
-        // closest = busca el elemento superior más cercano que coincida
-        // .card = clase que identifica la tarjeta de la tarea
         const parentTask = event.target.closest(".card");
-
-        // Aquí se obtiene el identificador guardado en la tarjeta
-        // dataset = permite acceder a los atributos data-* del elemento
-        // taskId = corresponde al atributo data-task-id
-        // Number = convierte el valor recibido de texto a número
         const taskId = Number(parentTask.dataset.taskId);
+        const task = taskManager.getTaskById(taskId);
 
-        // Aquí se elimina del arreglo la tarea seleccionada
-        // deleteTask = elimina la tarea que tenga el identificador recibido
-        taskManager.deleteTask(taskId);
+        if (task.estado === "COMPLETADA") {
 
-        // Aquí se guardan nuevamente las tareas después de eliminar
-        taskManager.save();
-
-        // Aquí se actualiza la lista para que desaparezca la tarea eliminada
-        taskManager.render();
-
-    }
-
-});
-
-// Aquí se buscan todos los botones que permiten cambiar el estado de las tareas
-// querySelectorAll = busca todos los elementos que coincidan
-// .btn-completar = clase utilizada para identificar los botones
-// botonesCompletar = guarda todos los botones encontrados
-const botonesCompletar = document.querySelectorAll(".btn-completar");
-
-// Aquí se recorren los botones uno por uno
-// forEach = recorre los elementos de una lista
-// botonCompletar = representa el botón actual del recorrido
-botonesCompletar.forEach(function (botonCompletar) {
-
-    // Aquí se escucha el clic realizado sobre cada botón
-    // click = acción de hacer clic
-    botonCompletar.addEventListener("click", function () {
-
-        // Aquí se busca la tarjeta donde se encuentra el botón
-        // closest = busca el elemento superior más cercano que coincida
-        // .card = clase que identifica la tarjeta
-        const tarjeta = botonCompletar.closest(".card");
-
-        // Aquí se busca el estado dentro de la tarjeta
-        // .badge = clase utilizada para mostrar el estado
-        const estadoTarjeta = tarjeta.querySelector(".badge");
-
-
-        // Aquí se verifica si la tarea todavía no está completada
-        // !== = verifica que dos valores sean diferentes
-        if (estadoTarjeta.textContent !== "Completada") {
-
-            // Aquí se cambia el estado de la tarea a completada
-            estadoTarjeta.textContent = "Completada";
-
-            // Aquí se elimina el color utilizado para pendiente
-            // text-bg-warning = clase de Bootstrap utilizada para el color de advertencia
-            estadoTarjeta.classList.remove("text-bg-warning");
-
-            // Aquí se agrega el color utilizado para completada
-            // text-bg-success = clase de Bootstrap utilizada para indicar éxito
-            estadoTarjeta.classList.add("text-bg-success");
-
-            // Aquí se cambia el texto del botón para permitir volver a pendiente
-            botonCompletar.textContent = "Marcar como pendiente";
+            task.estado = "PORHACER";
 
         }
         else {
 
-            // Aquí se devuelve la tarea al estado pendiente
-
-            // Aquí se cambia el texto del estado a pendiente
-            estadoTarjeta.textContent = "Pendiente";
-
-            // Aquí se elimina el color utilizado para completada
-            estadoTarjeta.classList.remove("text-bg-success");
-
-            // Aquí se agrega el color utilizado para pendiente
-            estadoTarjeta.classList.add("text-bg-warning");
-
-            // Aquí se cambia el texto del botón para volver a marcar la tarea como completada
-            botonCompletar.textContent = "Marcar como completada";
+            task.estado = "COMPLETADA";
 
         }
 
-    });
+        taskManager.save();
+        taskManager.render();
+
+    }
+
+    // Aquí se verifica si el elemento seleccionado corresponde al botón para cambiar el estado.
+    // done-button = clase utilizada para identificar el botón dinámico de la Tarea 7.
+    if (event.target.classList.contains("done-button")) {
+
+        // Aquí se busca la tarjeta que contiene el botón seleccionado.
+        // closest(".card") = encuentra la tarjeta superior más cercana.
+        const parentTask = event.target.closest(".card");
+
+        // Aquí se recupera el identificador almacenado en data-task-id.
+        // Number = convierte el identificador recibido como texto a un número.
+        const taskId = Number(parentTask.dataset.taskId);
+
+        // Aquí se busca dentro de TaskManager la tarea que tiene el identificador recuperado.
+        // getTaskById = devuelve la tarea exacta que se quiere actualizar.
+        const task = taskManager.getTaskById(taskId);
+
+        // Aquí se verifica si la tarea seleccionada ya se encuentra completada.
+        if (task.estado === "COMPLETADA") {
+
+            // Aquí se devuelve la tarea seleccionada al estado pendiente.
+            task.estado = "PORHACER";
+
+        }
+        else {
+
+            // Aquí se cambia la tarea seleccionada al estado completado.
+            task.estado = "COMPLETADA";
+
+        }
+
+        // Aquí se guarda en localStorage el nuevo estado de la tarea.
+        taskManager.save();
+
+        // Aquí se reconstruye la lista para mostrar visualmente el cambio.
+        taskManager.render();
+
+    }
 
 });
