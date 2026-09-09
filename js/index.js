@@ -250,29 +250,6 @@ console.log(taskManager.tasks);
 // event = guarda la información del elemento sobre el que se hizo clic
 listaTareas.addEventListener("click", function (event) {
 
-    // Recupera la tarea correspondiente cuando se presiona el botón para completarla.
-    if (event.target.classList.contains("done-button")) {
-
-        const parentTask = event.target.closest(".card");
-        const taskId = Number(parentTask.dataset.taskId);
-        const task = taskManager.getTaskById(taskId);
-
-        if (task.estado === "COMPLETADA") {
-
-            task.estado = "PORHACER";
-
-        }
-        else {
-
-            task.estado = "COMPLETADA";
-
-        }
-
-        taskManager.save();
-        taskManager.render();
-
-    }
-
     // Aquí se verifica si el elemento seleccionado corresponde al botón para cambiar el estado.
     // done-button = clase utilizada para identificar el botón dinámico de la Tarea 7.
     if (event.target.classList.contains("done-button")) {
@@ -307,6 +284,19 @@ listaTareas.addEventListener("click", function (event) {
         taskManager.save();
 
         // Aquí se reconstruye la lista para mostrar visualmente el cambio.
+        taskManager.render();
+
+    }
+
+    // La eliminación también se atiende mediante delegación de eventos porque
+    // las tarjetas y sus botones son creados dinámicamente por render().
+    if (event.target.classList.contains("delete-button")) {
+
+        const parentTask = event.target.closest(".card");
+        const taskId = Number(parentTask.dataset.taskId);
+
+        taskManager.deleteTask(taskId);
+        taskManager.save();
         taskManager.render();
 
     }

@@ -241,6 +241,31 @@ taskManager.getTaskById(taskId)
 - Conservación de la estructura de los objetos de tarea.
 - Conservación de la clave utilizada en `localStorage`.
 
+
+### Tarea 8
+
+En esta tarea se completó la persistencia de la aplicación mediante `localStorage`.
+
+Se realizaron los siguientes cambios:
+
+- Actualización de `save()` para guardar tanto el arreglo `tasks` como el contador `currentId`.
+- Conversión de las tareas a texto mediante `JSON.stringify()`.
+- Conversión de `currentId` a texto mediante `String()` antes de almacenarlo.
+- Actualización de `load()` para recuperar y reconstruir las tareas mediante `JSON.parse()`.
+- Conversión de `currentId` nuevamente a número mediante `Number()`.
+- Carga de los datos antes del primer `render()` de la aplicación.
+- Guardado después de agregar, actualizar o eliminar una tarea.
+- Corrección del manejador duplicado de `done-button`, que podía cambiar dos veces el estado con un solo clic.
+- Recuperación de la eliminación dinámica mediante `delete-button`.
+- Validación de que los identificadores continúen su secuencia después de recargar la página.
+
+La información se almacena con las claves:
+
+- `tasks`: contiene la lista de tareas serializada en formato JSON.
+- `currentId`: conserva el último identificador utilizado.
+
+Esto permite mantener las tareas, sus estados y la secuencia de identificadores al recargar o volver a abrir la aplicación.
+
 La integración fue comprobada visualmente creando varias tareas y cambiando individualmente el estado de una de ellas. La tarjeta seleccionada cambió a `COMPLETADA`, mientras las demás conservaron el estado `PORHACER`.
 
 
@@ -489,7 +514,7 @@ Durante el desarrollo del proyecto se aplicaron los siguientes conceptos:
 
 ## Estado del proyecto
 
-Las funcionalidades correspondientes a las Tareas 1–7 se encuentran integradas en el código local actual.
+Las funcionalidades correspondientes a las Tareas 1–8 se encuentran integradas en el código local actual.
 
 Entre las funcionalidades incorporadas se encuentran:
 
@@ -524,7 +549,7 @@ Entre las funcionalidades incorporadas se encuentran:
 - Identidad visual inspirada en LIHEN.
 - Ajustes CSS para diferentes tamaños de pantalla.
 
-La implementación de la Tarea 7 y la personalización visual se encuentran en el espacio de trabajo local.
+La implementación de la Tarea 8 y la personalización visual se encuentran en el espacio de trabajo local.
 
 Su publicación en GitHub quedará confirmada únicamente después de revisar los cambios, crear el commit y ejecutar el push correspondiente.
 

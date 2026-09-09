@@ -304,13 +304,22 @@ class TaskManager {
     // save = nombre del método que guarda las tareas en localStorage
     save() {
 
-        // Aquí se convierten las tareas a texto y se guardan en localStorage
-        // localStorage = permite guardar información en el navegador
-        // setItem = guarda un dato dentro de localStorage
-        // "tasks" = nombre utilizado para identificar la información guardada
-        // JSON.stringify = convierte el arreglo de tareas en texto
-        // this.tasks = arreglo que contiene las tareas actuales
-        localStorage.setItem("tasks", JSON.stringify(this.tasks));
+        // Aquí se convierte la lista de tareas a un texto JSON antes de guardarla
+        // JSON.stringify = transforma el arreglo de objetos en una cadena de texto
+        // localStorage solo puede almacenar valores en formato texto
+        const tasksJson = JSON.stringify(this.tasks);
+
+        // Aquí se guarda la lista serializada utilizando la clave "tasks"
+        // setItem = crea o actualiza un dato dentro de localStorage
+        localStorage.setItem("tasks", tasksJson);
+
+        // Aquí se convierte el contador a texto para conservarlo en localStorage
+        // String = transforma el valor numérico en una cadena de texto
+        const currentId = String(this.currentId);
+
+        // Aquí se guarda el último identificador utilizado
+        // Esta información permite que addTask() continúe la numeración después de recargar
+        localStorage.setItem("currentId", currentId);
 
     }
 
@@ -318,39 +327,39 @@ class TaskManager {
     // load = nombre del método que carga las tareas desde localStorage
     load() {
 
-        // Aquí se obtiene la información guardada en localStorage
-        // const = crea una variable que no será reasignada
-        // tareasGuardadas = guarda la información recuperada
-        // getItem = obtiene un dato guardado en localStorage
-        // "tasks" = nombre utilizado para identificar las tareas guardadas
-        const tareasGuardadas = localStorage.getItem("tasks");
+        // Aquí se recupera el texto JSON asociado con la lista de tareas guardada
+        // getItem = obtiene el valor almacenado utilizando la clave indicada
+        // "tasks" = clave utilizada por save() para identificar la lista de tareas
+        // Si la clave no existe, localStorage devuelve null
+        const tasksJson = localStorage.getItem("tasks");
 
-        // Aquí se verifica si existen tareas guardadas
-        // if = ejecuta instrucciones cuando se cumple una condición
-        // !== = verifica que dos valores sean diferentes
-        // null = indica que no existe información guardada
-        if (tareasGuardadas !== null) {
+        // Aquí se verifica si se recuperó información antes de intentar convertirla
+        // if = ejecuta las instrucciones cuando tasksJson contiene un valor
+        // Esta validación evita ejecutar JSON.parse() cuando no existen tareas guardadas
+        if (tasksJson) {
 
-            // Aquí se convierte nuevamente el texto guardado en un arreglo de tareas
-            // JSON.parse = convierte el texto JSON nuevamente en datos de JavaScript
-            // this.tasks = arreglo donde se guardarán las tareas recuperadas
-            this.tasks = JSON.parse(tareasGuardadas);
+            // Aquí se convierte nuevamente el texto JSON en datos de JavaScript
+            // JSON.parse = transforma la cadena de texto en un arreglo de tareas
+            // this.tasks = reemplaza la lista vacía por las tareas recuperadas
+            this.tasks = JSON.parse(tasksJson);
 
-            // Aquí se recorren las tareas recuperadas para conservar el identificador más alto
-            // for...of = permite recorrer uno por uno los elementos del arreglo
-            // task = representa la tarea actual del recorrido
-            for (let task of this.tasks) {
+        }
 
-                // Aquí se verifica si el identificador de la tarea es mayor al contador actual
-                // > = verifica si un valor es mayor que otro
-                if (task.id > this.currentId) {
+        // Aquí se recupera por separado el último identificador utilizado
+        // currentId = guarda temporalmente el valor recuperado
+        // "currentId" = clave utilizada por save() para identificar el contador
+        // localStorage devuelve el valor como texto o null si todavía no existe
+        const currentId = localStorage.getItem("currentId");
 
-                    // Aquí se actualiza el contador con el identificador más alto encontrado
-                    this.currentId = task.id;
+        // Aquí se verifica que exista un contador guardado antes de restaurarlo
+        // Esta condición conserva el valor inicial del constructor en el primer uso
+        if (currentId) {
 
-                }
-
-            }
+            // Aquí se restaura el contador dentro del administrador de tareas
+            // Number = convierte el texto recuperado en un número
+            // this.currentId = valor utilizado por addTask() para generar el siguiente id
+            // La conversión evita concatenar texto y permite continuar la secuencia numérica
+            this.currentId = Number(currentId);
 
         }
 
