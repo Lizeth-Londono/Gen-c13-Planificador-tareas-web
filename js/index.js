@@ -1,303 +1,491 @@
-// Aquí se busca el formulario y los campos que se utilizarán desde JavaScript
-// const = crea una variable
-// document = representa el documento HTML
-// querySelector = busca el primer elemento que coincida
-// # = indica que se busca un elemento por su id
+// Aquí se busca el formulario y los campos que se utilizarán desde JavaScript.
 
-// formularioTarea = guarda el formulario encontrado en el HTML
+// const = crea una variable que no será reasignada.
+// document = representa el documento HTML.
+// querySelector = busca el primer elemento que coincida con el selector recibido.
+// # = indica que se está buscando un elemento por su id.
+
+
+// Aquí buscamos el formulario principal donde se registran las tareas.
+// formularioTarea = guarda la referencia al formulario encontrado en el HTML.
 const formularioTarea = document.querySelector("#formularioTarea");
 
-// nombreTarea = guarda el campo donde se escribe el nombre de la tarea
+
+// Aquí buscamos el campo donde el usuario escribe el nombre de la tarea.
+// nombreTarea = guarda la referencia al input del nombre.
 const nombreTarea = document.querySelector("#nombreTarea");
 
-// descripcionTarea = guarda el campo donde se escribe la descripción
+
+// Aquí buscamos el campo donde el usuario escribe la descripción.
+// descripcionTarea = guarda la referencia al campo de descripción.
 const descripcionTarea = document.querySelector("#descripcionTarea");
 
-// fechaEntrega = guarda el campo donde se selecciona la fecha
+
+// Aquí buscamos el campo donde el usuario selecciona la fecha de entrega.
+// fechaEntrega = guarda la referencia al input de tipo fecha.
 const fechaEntrega = document.querySelector("#fechaEntrega");
 
-// estadoTarea = guarda el campo donde se selecciona el estado
+
+// Aquí buscamos el campo donde el usuario selecciona el estado.
+// estadoTarea = guarda la referencia al selector de estado.
 const estadoTarea = document.querySelector("#estadoTarea");
 
-// mensajeError = guarda el elemento donde se mostrará un mensaje de error
+
+// Aquí buscamos el elemento donde se mostrarán los mensajes de error.
+// mensajeError = guarda la referencia al contenedor visual del error.
 const mensajeError = document.querySelector("#mensajeError");
 
-// mensajeExito = guarda el elemento donde se mostrará un mensaje de éxito
+
+// Aquí buscamos el elemento donde se mostrarán los mensajes de éxito.
+// mensajeExito = guarda la referencia al contenedor visual del mensaje correcto.
 const mensajeExito = document.querySelector("#mensajeExito");
 
-// Aquí se busca el contenedor donde se encuentran las tareas
-// listaTareas = guarda el contenedor de las tarjetas de tareas
-// document = representa el documento HTML
-// querySelector = busca el primer elemento que coincida
-// #listaTareas = identifica el contenedor por su id
+
+// Aquí buscamos el contenedor donde se mostrarán las tarjetas de tareas.
+// listaTareas = guarda la referencia al contenedor identificado con #listaTareas.
 const listaTareas = document.querySelector("#listaTareas");
 
-// Aquí se escucha cuando el usuario intenta enviar el formulario
-// addEventListener = escucha una acción que ocurre en un elemento
-// submit = acción de enviar el formulario
-// function = crea una función que ejecutará las instrucciones
-// event = guarda la información del evento ocurrido
-formularioTarea.addEventListener("submit", function (event) {
 
-    // Aquí se evita que la página se recargue mientras se validan los datos
-    // preventDefault = evita el comportamiento automático del formulario
+// Aquí creamos una nueva instancia de TaskManager.
+// new = crea un nuevo objeto utilizando la clase TaskManager.
+// taskManager = será el objeto encargado de administrar las tareas.
+const taskManager = new TaskManager();
+
+
+// Aquí escuchamos cuando el usuario intenta enviar el formulario.
+// addEventListener = permite reaccionar a una acción del usuario.
+// "submit" = representa el evento de envío del formulario.
+// async = permite utilizar await dentro de la función.
+// function (event) = función que se ejecuta cuando ocurre el envío.
+// event = guarda la información del evento ocurrido.
+formularioTarea.addEventListener("submit", async function (event) {
+
+    // Aquí evitamos que el navegador recargue la página automáticamente.
+    // preventDefault() = cancela el comportamiento normal del formulario.
     event.preventDefault();
 
-    // Aquí se guarda la información escrita o seleccionada por el usuario
-    // datosTarea = objeto que reúne los datos del formulario
-    // { } = crea un objeto
-    // value = obtiene el valor actual de un campo
+
+    // Aquí reunimos en un solo objeto los datos escritos por el usuario.
+    // datosTarea = objeto temporal que contiene la información del formulario.
     const datosTarea = {
 
-        // nombre = guarda el valor escrito en nombreTarea
+        // Aquí guardamos el nombre escrito en el campo nombreTarea.
+        // .value = obtiene el valor actual del input.
         nombre: nombreTarea.value,
 
-        // descripcion = guarda el valor escrito en descripcionTarea
+        // Aquí guardamos la descripción escrita por el usuario.
         descripcion: descripcionTarea.value,
 
-        // fecha = guarda la fecha seleccionada
+        // Aquí guardamos la fecha seleccionada.
         fecha: fechaEntrega.value,
 
-        // estado = guarda el estado seleccionado
+        // Aquí guardamos el estado seleccionado.
         estado: estadoTarea.value
 
     };
 
 
-    // Aquí se valida la información ingresada
-    // resultadoValidacion = guarda el resultado de la validación
-    // validFormFieldInput = función que revisa los datos de la tarea
+    // Aquí enviamos los datos a la función de validación.
+    // validFormFieldInput() = revisa si los campos cumplen las reglas definidas.
+    // resultadoValidacion = guarda el resultado devuelto por la función.
     const resultadoValidacion = validFormFieldInput(datosTarea);
 
 
-    // Aquí se verifica si la información no es válida
-    // if = ejecuta instrucciones cuando se cumple una condición
-    // === = compara si dos valores son iguales
+    // Aquí verificamos si la validación indicó que existen errores.
+    // === false = comprueba que el valor sea exactamente falso.
     if (resultadoValidacion.valido === false) {
 
-        // Aquí se muestra el mensaje de error
-        // textContent = cambia o guarda el texto de un elemento
+        // Aquí colocamos el mensaje de error dentro del elemento correspondiente.
+        // textContent = modifica el texto visible de un elemento HTML.
         mensajeError.textContent = resultadoValidacion.mensaje;
 
-        // Aquí se hace visible el mensaje de error
-        // classList = permite trabajar con las clases de un elemento
-        // remove = elimina una clase
-        // d-none = clase de Bootstrap que oculta un elemento
+        // Aquí hacemos visible el mensaje de error.
+        // classList = permite modificar las clases CSS del elemento.
+        // remove("d-none") = elimina la clase de Bootstrap que lo mantenía oculto.
         mensajeError.classList.remove("d-none");
 
-        // Aquí se oculta el mensaje de éxito
-        // add = agrega una clase
+        // Aquí ocultamos el mensaje de éxito para evitar mostrar mensajes contradictorios.
+        // add("d-none") = agrega la clase que oculta el elemento.
         mensajeExito.classList.add("d-none");
 
+        // Aquí detenemos la ejecución del envío.
+        // return = termina la función actual.
+        return;
+
     }
-    else {
 
-        // Aquí se ejecuta cuando la información es correcta
-        // else = se ejecuta cuando la condición del if no se cumple
 
-        // Aquí se oculta el mensaje de error
-        mensajeError.classList.add("d-none");
+    // Aquí ocultamos cualquier mensaje de error anterior.
+    mensajeError.classList.add("d-none");
 
-        // Aquí se guarda el mensaje de éxito
-        mensajeExito.textContent = resultadoValidacion.mensaje;
 
-        // Aquí se hace visible el mensaje de éxito
-        mensajeExito.classList.remove("d-none");
+    // Aquí intentamos ejecutar la operación que depende del backend.
+    // try = agrupa instrucciones que podrían generar un error.
+    try {
 
-        // Aquí se registra la tarea después de validar correctamente los datos
-        // addTask = agrega la tarea al administrador
-        taskManager.addTask(
+        // Aquí enviamos la tarea al TaskManager.
+        // await = espera a que termine la petición al backend antes de continuar.
+        // addTask() = realiza internamente la petición POST.
+        await taskManager.addTask(
 
+            // Aquí enviamos el nombre de la tarea.
             datosTarea.nombre,
+
+            // Aquí enviamos la descripción.
             datosTarea.descripcion,
+
+            // Aquí enviamos la fecha de entrega.
             datosTarea.fecha,
+
+            // Aquí enviamos el estado seleccionado.
             datosTarea.estado
 
         );
 
-        // Aquí se guardan las tareas después de registrar una nueva tarea
-        // save = guarda la lista actual de tareas en localStorage
-        taskManager.save();
 
-        // Aquí se actualiza la lista de tareas mostrada en la página
-        // render = vuelve a construir visualmente las tarjetas con las tareas actuales
+        // Aquí reconstruimos visualmente la lista de tareas.
+        // render() = toma taskManager.tasks y genera nuevamente las tarjetas.
         taskManager.render();
 
-        // Aquí se verifica que la tarea del formulario se haya guardado
-        // console.log = muestra la lista actualizada en la consola
+
+        // Aquí definimos el mensaje que verá el usuario después del guardado correcto.
+        mensajeExito.textContent = "La tarea se guardó correctamente.";
+
+        // Aquí hacemos visible el mensaje de éxito.
+        mensajeExito.classList.remove("d-none");
+
+
+        // Aquí limpiamos los campos del formulario.
+        // reset() = devuelve los campos a su estado inicial.
+        formularioTarea.reset();
+
+
+        // Aquí mostramos en consola el arreglo actualizado de tareas.
+        // console.log() = permite observar información durante las pruebas.
         console.log(taskManager.tasks);
 
-        // Aquí se limpian los campos después de registrar correctamente la tarea
-        // reset = devuelve los campos del formulario a su estado inicial
-        formularioTarea.reset();
+    }
+    catch (error) {
+
+        // Aquí capturamos cualquier error ocurrido durante la petición al backend.
+        // catch = se ejecuta cuando una instrucción dentro de try genera un error.
+
+        // Aquí mostramos al usuario el mensaje asociado al error.
+        mensajeError.textContent = error.message;
+
+        // Aquí hacemos visible el mensaje de error.
+        mensajeError.classList.remove("d-none");
+
+        // Aquí ocultamos el mensaje de éxito.
+        mensajeExito.classList.add("d-none");
+
+        // Aquí mostramos el error completo en la consola del navegador.
+        // console.error() = permite identificar fallos durante el desarrollo.
+        console.error(error);
 
     }
 
 });
 
 
-// Aquí se valida que los campos obligatorios tengan información
-// function = crea una función
-// validFormFieldInput = nombre de la función de validación
-// data = recibe los datos que se van a validar
+// Aquí se crea la función encargada de validar los datos del formulario.
+// function = declara una función.
+// validFormFieldInput = nombre de la función.
+// data = parámetro que recibe el objeto con los datos de la tarea.
 function validFormFieldInput(data) {
 
-    // Aquí se valida que el nombre no esté vacío
-    // trim = elimina espacios al inicio y al final
-    // return = devuelve un resultado y termina la función
+    // Aquí verificamos que el nombre no esté vacío.
+    // trim() = elimina espacios al inicio y al final.
+    // === "" = verifica si después de limpiar espacios no queda texto.
     if (data.nombre.trim() === "") {
 
+        // Aquí devolvemos un resultado indicando que la validación falló.
         return {
 
+            // valido = false indica que los datos no cumplen la regla.
             valido: false,
+
+            // mensaje = texto que se mostrará al usuario.
             mensaje: "El nombre de la tarea es obligatorio."
 
         };
+
     }
 
-    // Aquí se valida que el nombre tenga mínimo 3 caracteres
-    // length = indica la cantidad de caracteres
-    // < = verifica si un valor es menor que otro
+
+    // Aquí verificamos que el nombre tenga mínimo 3 caracteres.
+    // length = indica la cantidad de caracteres del texto.
+    // < 3 = comprueba si el nombre es demasiado corto.
     if (data.nombre.trim().length < 3) {
 
+        // Aquí devolvemos el resultado de validación correspondiente.
         return {
 
+            // Aquí indicamos que la información todavía no es válida.
             valido: false,
+
+            // Aquí explicamos la regla que no se cumplió.
             mensaje: "El nombre de la tarea debe tener mínimo 3 caracteres."
 
         };
+
     }
 
-    // Aquí se valida que la descripción no esté vacía
+
+    // Aquí verificamos que la descripción no esté vacía.
     if (data.descripcion.trim() === "") {
 
+        // Aquí devolvemos un resultado negativo.
         return {
 
+            // Aquí indicamos que la validación falló.
             valido: false,
+
+            // Aquí mostramos el mensaje correspondiente.
             mensaje: "La descripción es obligatoria."
 
         };
+
     }
 
-    // Aquí se valida que la descripción tenga mínimo 5 caracteres
+
+    // Aquí verificamos que la descripción tenga mínimo 5 caracteres.
     if (data.descripcion.trim().length < 5) {
 
+        // Aquí devolvemos un resultado negativo.
         return {
 
+            // Aquí indicamos que la información no cumple la regla.
             valido: false,
+
+            // Aquí mostramos el mensaje correspondiente.
             mensaje: "La descripción debe tener mínimo 5 caracteres."
 
         };
+
     }
 
-    // Aquí se valida que se haya seleccionado una fecha
+
+    // Aquí verificamos que se haya seleccionado una fecha.
+    // === "" = significa que el campo todavía no tiene valor.
     if (data.fecha === "") {
 
+        // Aquí devolvemos un resultado negativo.
         return {
 
+            // Aquí indicamos que la validación falló.
             valido: false,
+
+            // Aquí indicamos qué información falta.
             mensaje: "Debes seleccionar una fecha de entrega."
 
         };
+
     }
 
-    // Aquí se valida que se haya seleccionado un estado
+
+    // Aquí verificamos que se haya seleccionado un estado.
     if (data.estado === "") {
 
+        // Aquí devolvemos un resultado negativo.
         return {
 
+            // Aquí indicamos que la información no es válida.
             valido: false,
+
+            // Aquí mostramos el mensaje correspondiente.
             mensaje: "Debes seleccionar un estado."
 
         };
+
     }
 
-    // Aquí se indica que toda la información es correcta
-    // true = representa un resultado verdadero
+
+    // Aquí llegamos solamente si todas las validaciones anteriores fueron superadas.
+    // Entonces, devolvemos un resultado positivo.
     return {
 
+        // true = indica que la información cumple las reglas.
         valido: true,
+
+        // Aquí definimos el mensaje asociado a la validación correcta.
         mensaje: "La información es correcta."
 
     };
 
 }
 
-// Aquí se crea una nueva instancia de TaskManager
-// taskManager = variable que guarda el administrador de tareas
-// new = crea una nueva instancia
-// TaskManager() = utiliza la clase TaskManager y ejecuta su constructor
-const taskManager = new TaskManager();
+
+// Aquí creamos una función para cargar las tareas al iniciar la aplicación.
+// async = permite utilizar await dentro de la función.
+async function cargarTareasIniciales() {
+
+    // Aquí intentamos consultar el backend.
+    try {
+
+        // Aquí pedimos al TaskManager cargar las tareas.
+        // await = espera la respuesta GET antes de continuar.
+        // load() = consulta /api/tasks y llena taskManager.tasks.
+        await taskManager.load();
 
 
-// Aquí se recuperan las tareas guardadas cuando se inicia la aplicación
-// load = carga las tareas almacenadas anteriormente en localStorage
-taskManager.load();
-
-
-// Aquí se muestran en la página las tareas recuperadas
-// render = actualiza visualmente la lista con las tareas cargadas
-taskManager.render();
-
-// Aquí se verifica en consola la lista de tareas
-// console.log = muestra información en la consola del navegador
-// taskManager.tasks = arreglo donde se guardan las tareas
-console.log(taskManager.tasks);
-
-// Aquí se escucha cuando el usuario hace clic dentro de la lista de tareas
-// addEventListener = escucha una acción que ocurre en un elemento
-// click = acción de hacer clic
-// event = guarda la información del elemento sobre el que se hizo clic
-listaTareas.addEventListener("click", function (event) {
-
-    // Aquí se verifica si el elemento seleccionado corresponde al botón para cambiar el estado.
-    // done-button = clase utilizada para identificar el botón dinámico de la Tarea 7.
-    if (event.target.classList.contains("done-button")) {
-
-        // Aquí se busca la tarjeta que contiene el botón seleccionado.
-        // closest(".card") = encuentra la tarjeta superior más cercana.
-        const parentTask = event.target.closest(".card");
-
-        // Aquí se recupera el identificador almacenado en data-task-id.
-        // Number = convierte el identificador recibido como texto a un número.
-        const taskId = Number(parentTask.dataset.taskId);
-
-        // Aquí se busca dentro de TaskManager la tarea que tiene el identificador recuperado.
-        // getTaskById = devuelve la tarea exacta que se quiere actualizar.
-        const task = taskManager.getTaskById(taskId);
-
-        // Aquí se verifica si la tarea seleccionada ya se encuentra completada.
-        if (task.estado === "COMPLETADA") {
-
-            // Aquí se devuelve la tarea seleccionada al estado pendiente.
-            task.estado = "PORHACER";
-
-        }
-        else {
-
-            // Aquí se cambia la tarea seleccionada al estado completado.
-            task.estado = "COMPLETADA";
-
-        }
-
-        // Aquí se guarda en localStorage el nuevo estado de la tarea.
-        taskManager.save();
-
-        // Aquí se reconstruye la lista para mostrar visualmente el cambio.
+        // Aquí mostramos visualmente las tareas recuperadas.
         taskManager.render();
+
+
+        // Aquí mostramos en consola la lista obtenida desde PostgreSQL.
+        console.log(taskManager.tasks);
+
+    }
+    catch (error) {
+
+        // Aquí capturamos cualquier error ocurrido durante la consulta inicial.
+
+        // Aquí mostramos el mensaje de error dentro de la página.
+        mensajeError.textContent = error.message;
+
+        // Aquí hacemos visible el mensaje.
+        mensajeError.classList.remove("d-none");
+
+        // Aquí ocultamos cualquier mensaje de éxito.
+        mensajeExito.classList.add("d-none");
+
+        // Aquí mostramos el error completo en consola.
+        console.error(error);
 
     }
 
-    // La eliminación también se atiende mediante delegación de eventos porque
-    // las tarjetas y sus botones son creados dinámicamente por render().
-    if (event.target.classList.contains("delete-button")) {
+}
 
+
+// Aquí ejecutamos la función de carga inicial.
+// Entonces, cada vez que se abre o recarga la página,
+// el frontend consulta nuevamente las tareas almacenadas en PostgreSQL.
+cargarTareasIniciales();
+
+
+// Aquí escuchamos todos los clics realizados dentro de listaTareas.
+// Esto se conoce como delegación de eventos.
+// Se utiliza porque las tarjetas y sus botones son creados dinámicamente.
+// async = permite esperar las peticiones PUT y DELETE.
+listaTareas.addEventListener("click", async function (event) {
+
+    // Aquí verificamos si el elemento seleccionado tiene la clase done-button.
+    // classList.contains() = comprueba si una clase existe en el elemento.
+    if (event.target.classList.contains("done-button")) {
+
+        // Aquí buscamos la tarjeta completa a la que pertenece el botón.
+        // closest(".card") = busca el elemento padre más cercano con la clase card.
         const parentTask = event.target.closest(".card");
+
+
+        // Aquí recuperamos el identificador almacenado en data-task-id.
+        // dataset.taskId = obtiene el valor del atributo data-task-id.
+        // Number() = convierte el valor de texto a número.
         const taskId = Number(parentTask.dataset.taskId);
 
-        taskManager.deleteTask(taskId);
-        taskManager.save();
-        taskManager.render();
+
+        // Aquí intentamos actualizar el estado en el backend.
+        try {
+
+            // Aquí pedimos al TaskManager cambiar el estado.
+            // await = espera a que el PUT termine correctamente.
+            // toggleTaskStatus() = actualiza el registro en PostgreSQL.
+            await taskManager.toggleTaskStatus(taskId);
+
+
+            // Aquí reconstruimos la lista para mostrar el nuevo estado.
+            taskManager.render();
+
+
+            // Aquí definimos el mensaje de éxito.
+            mensajeExito.textContent =
+                "El estado de la tarea se actualizó correctamente.";
+
+
+            // Aquí hacemos visible el mensaje de éxito.
+            mensajeExito.classList.remove("d-none");
+
+
+            // Aquí ocultamos cualquier mensaje de error anterior.
+            mensajeError.classList.add("d-none");
+
+        }
+        catch (error) {
+
+            // Aquí capturamos cualquier error ocurrido durante la actualización.
+
+            // Aquí mostramos el mensaje de error.
+            mensajeError.textContent = error.message;
+
+            // Aquí hacemos visible el mensaje.
+            mensajeError.classList.remove("d-none");
+
+            // Aquí ocultamos el mensaje de éxito.
+            mensajeExito.classList.add("d-none");
+
+            // Aquí mostramos el error completo en consola.
+            console.error(error);
+
+        }
+
+    }
+
+
+    // Aquí verificamos si el elemento seleccionado tiene la clase delete-button.
+    if (event.target.classList.contains("delete-button")) {
+
+        // Aquí buscamos la tarjeta completa donde se encuentra el botón.
+        const parentTask = event.target.closest(".card");
+
+
+        // Aquí recuperamos el identificador de la tarea.
+        // Number() convierte el valor del dataset a número.
+        const taskId = Number(parentTask.dataset.taskId);
+
+
+        // Aquí intentamos eliminar la tarea en el backend.
+        try {
+
+            // Aquí solicitamos al TaskManager eliminar la tarea.
+            // await = espera a que termine la petición DELETE.
+            await taskManager.deleteTask(taskId);
+
+
+            // Aquí reconstruimos la lista sin la tarea eliminada.
+            taskManager.render();
+
+
+            // Aquí definimos el mensaje de éxito.
+            mensajeExito.textContent =
+                "La tarea se eliminó correctamente.";
+
+
+            // Aquí hacemos visible el mensaje de éxito.
+            mensajeExito.classList.remove("d-none");
+
+
+            // Aquí ocultamos cualquier mensaje de error anterior.
+            mensajeError.classList.add("d-none");
+
+        }
+        catch (error) {
+
+            // Aquí capturamos cualquier error ocurrido durante la eliminación.
+
+            // Aquí mostramos el mensaje del error.
+            mensajeError.textContent = error.message;
+
+            // Aquí hacemos visible el mensaje de error.
+            mensajeError.classList.remove("d-none");
+
+            // Aquí ocultamos el mensaje de éxito.
+            mensajeExito.classList.add("d-none");
+
+            // Aquí mostramos el error completo en la consola.
+            console.error(error);
+
+        }
 
     }
 

@@ -1,397 +1,497 @@
-// Aquí se crea la clase que se encargará de organizar las tareas
-// class = crea una clase
-// TaskManager = nombre de la clase que administra las tareas
+// Aquí se crea la clase encargada de administrar las tareas.
+// class = permite crear una estructura que agrupa datos y comportamientos.
+// TaskManager = nombre de la clase que manejará las tareas del frontend.
 class TaskManager {
 
-    // Aquí se inicia la lista de tareas vacía y el contador de identificadores
-    // constructor = se ejecuta al crear un nuevo TaskManager
-    // currentId = contador de identificadores
-    // = 0 = valor inicial del contador
-    constructor(currentId = 0) {
 
-        // Aquí se crea el arreglo donde se guardarán las tareas
-        // this = se refiere al objeto actual
-        // tasks = lista donde se guardan las tareas
-        // [] = arreglo vacío
+    // Aquí se crea el constructor de la clase.
+    // constructor = método que se ejecuta automáticamente al usar new TaskManager().
+    constructor() {
+
+        // Aquí se crea el arreglo donde se guardarán temporalmente las tareas.
+        // this = hace referencia a la instancia actual de TaskManager.
+        // tasks = propiedad que contiene la lista de tareas disponibles.
+        // [] = crea un arreglo vacío.
         this.tasks = [];
 
-        // Aquí se guarda el contador que permitirá identificar cada tarea
-        // this = se refiere al objeto actual
-        // currentId = guarda el contador dentro del objeto
-        this.currentId = currentId;
+
+        // Aquí se guarda la dirección principal del backend.
+        // apiUrl = propiedad donde se define la ruta base de la API.
+        // Esta dirección apunta al controlador TaskController de Spring Boot.
+        this.apiUrl = "http://localhost:8080/api/tasks";
 
     }
 
-    // Aquí se crea el método que permitirá agregar nuevas tareas
-    // addTask = método para registrar una tarea
-    // nombre = nombre de la tarea
-    // descripcion = detalle de la tarea
-    // fechaEntrega = fecha de entrega
-    // estado = estado recibido de la tarea
-    addTask(nombre, descripcion, fechaEntrega, estado) {
 
-        // Aquí se aumenta el identificador antes de guardar una nueva tarea
-        // this.currentId = contador actual de tareas
-        // ++ = aumenta el valor en 1
-        this.currentId++;
+    // Aquí se crea el método encargado de registrar una nueva tarea.
+    // async = permite utilizar await dentro del método.
+    // addTask = nombre del método.
+    // nombre, descripcion, fechaEntrega y estado = datos recibidos desde index.js.
+    async addTask(nombre, descripcion, fechaEntrega, estado) {
 
-        // Aquí se agrega una nueva tarea al arreglo de tareas
-        // push = agrega un elemento al final del arreglo
-        // { } = crea un objeto con la información de la tarea
-        this.tasks.push({
+        // Aquí se crea un objeto con la estructura que espera el backend.
+        // const = crea una variable que no será reasignada.
+        // tareaParaBackend = guarda temporalmente los datos antes de enviarlos.
+        const tareaParaBackend = {
 
-            // Aquí se guarda el identificador único de la tarea
-            // id = propiedad que identifica la tarea
-            // this.currentId = valor actual del contador
-            id: this.currentId,
+            // Aquí convertimos el nombre utilizado en el frontend.
+            // name = nombre de la propiedad definida en la entidad Task del backend.
+            // nombre = valor recibido desde el formulario.
+            name: nombre,
 
-            // Aquí se guarda el nombre de la tarea
-            // nombre = propiedad que guarda el nombre recibido
-            nombre: nombre,
+            // Aquí convertimos la descripción al nombre esperado por el backend.
+            description: descripcion,
 
-            // Aquí se guarda la descripción de la tarea
-            // descripcion = propiedad que guarda el detalle recibido
-            descripcion: descripcion,
+            // Aquí convertimos la fecha al campo dueDate utilizado en Java.
+            dueDate: fechaEntrega,
 
-            // Aquí se guarda la fecha de entrega de la tarea
-            // fechaEntrega = propiedad que guarda la fecha recibida
-            fechaEntrega: fechaEntrega,
+            // Aquí convertimos el estado al campo status del backend.
+            status: estado
 
-            // Aquí se guarda el estado inicial de la tarea
-            // estado = propiedad que indica el estado de la tarea
-            // PORHACER = estado inicial de una tarea nueva
-            estado: "PORHACER"
+        };
+
+
+        // Aquí enviamos la nueva tarea al backend.
+        // response = guarda la respuesta recibida desde Spring Boot.
+        // await = espera que la petición termine antes de continuar.
+        // fetch = permite realizar peticiones HTTP desde JavaScript.
+        // this.apiUrl = utiliza la dirección definida en el constructor.
+        const response = await fetch(this.apiUrl, {
+
+            // Aquí indicamos que la petición será de tipo POST.
+            // POST = se utiliza para crear un nuevo registro.
+            method: "POST",
+
+            // Aquí configuramos los encabezados de la petición.
+            // headers = informa al backend qué tipo de contenido estamos enviando.
+            headers: {
+
+                // Aquí indicamos que el cuerpo de la petición está en formato JSON.
+                "Content-Type": "application/json"
+
+            },
+
+            // Aquí convertimos el objeto JavaScript a texto JSON.
+            // JSON.stringify = transforma un objeto en una cadena JSON.
+            // body = contenido que será enviado al backend.
+            body: JSON.stringify(tareaParaBackend)
 
         });
 
+
+        // Aquí verificamos si la respuesta del backend fue correcta.
+        // response.ok = devuelve true cuando el código HTTP está entre 200 y 299.
+        // ! = invierte el resultado.
+        if (!response.ok) {
+
+            // Aquí detenemos el proceso cuando la petición falla.
+            // throw = genera un error.
+            // new Error = crea un objeto de error con un mensaje.
+            throw new Error("No fue posible guardar la tarea.");
+
+        }
+
+
+        // Aquí convertimos la respuesta JSON del backend a un objeto JavaScript.
+        // response.json() = interpreta el cuerpo de la respuesta como JSON.
+        // tareaGuardada = contiene la tarea ya registrada en PostgreSQL.
+        const tareaGuardada = await response.json();
+
+
+        // Aquí adaptamos nuevamente los nombres del backend al formato del frontend.
+        // tareaFrontend = objeto que utilizará render() para mostrar la tarea.
+        const tareaFrontend = {
+
+            // Aquí guardamos el ID generado automáticamente por PostgreSQL.
+            id: tareaGuardada.id,
+
+            // Aquí convertimos name nuevamente a nombre.
+            nombre: tareaGuardada.name,
+
+            // Aquí convertimos description nuevamente a descripcion.
+            descripcion: tareaGuardada.description,
+
+            // Aquí convertimos dueDate nuevamente a fechaEntrega.
+            fechaEntrega: tareaGuardada.dueDate,
+
+            // Aquí convertimos status nuevamente a estado.
+            estado: tareaGuardada.status
+
+        };
+
+
+        // Aquí agregamos la tarea ya guardada al arreglo del frontend.
+        // push = agrega un elemento al final del arreglo.
+        this.tasks.push(tareaFrontend);
+
+
+        // Aquí devolvemos la tarea recién creada.
+        // return = devuelve un valor al lugar donde se llamó addTask().
+        return tareaFrontend;
+
     }
 
-    // Aquí se crea el método que permite buscar una tarea por su identificador.
-    // getTaskById = nombre del método que recupera una tarea específica.
-    // taskId = identificador de la tarea que se quiere encontrar.
+
+    // Aquí se crea el método encargado de buscar una tarea por su ID.
+    // getTaskById = nombre del método.
+    // taskId = identificador de la tarea que queremos encontrar.
     getTaskById(taskId) {
 
-        // Aquí se crea una variable para guardar la tarea encontrada.
-        // let = permite que el valor de la variable sea asignado posteriormente.
-        // foundTask = almacenará la tarea cuyo identificador coincida.
+        // Aquí creamos una variable para guardar la tarea encontrada.
+        // let = permite crear una variable cuyo valor puede cambiar.
         let foundTask;
 
-        // Aquí se recorren una por una las tareas almacenadas.
-        // for...of = permite recorrer los elementos de un arreglo.
-        // this.tasks = arreglo donde se encuentran las tareas.
+
+        // Aquí recorremos todas las tareas disponibles.
+        // for...of = recorre uno por uno los elementos de un arreglo.
+        // task = representa la tarea actual del recorrido.
+        // this.tasks = arreglo principal de tareas.
         for (let task of this.tasks) {
 
-            // Aquí se compara el identificador de la tarea actual con el recibido.
-            // === = comprueba que ambos valores sean iguales y del mismo tipo.
+            // Aquí comparamos el ID de la tarea actual con el ID recibido.
+            // === = compara valor y tipo de dato.
             if (task.id === taskId) {
 
-                // Aquí se guarda la tarea que tiene el identificador buscado.
+                // Aquí guardamos la tarea cuando encontramos una coincidencia.
                 foundTask = task;
 
             }
 
         }
 
-        // Aquí se devuelve la tarea encontrada.
-        // Si no existe una coincidencia, el resultado será undefined.
+
+        // Aquí devolvemos la tarea encontrada.
+        // Si no existe una coincidencia, foundTask quedará como undefined.
         return foundTask;
 
     }
 
-    // Aquí se crea el método que construye la tarjeta de una tarea
-    // createTaskHtml = nombre del método que crea el HTML de una tarea
-    // task = parámetro que recibe el objeto con la información de la tarea
+
+    // Aquí se crea el método encargado de construir el HTML de cada tarea.
+    // createTaskHtml = recibe una tarea y devuelve su estructura visual.
+    // task = objeto que contiene los datos de la tarea.
     createTaskHtml(task) {
 
-        // Aquí se define inicialmente el color del estado como pendiente
-        // let = crea una variable cuyo valor puede cambiar
-        // claseEstado = guarda la clase de Bootstrap que tendrá el estado
+        // Aquí definimos inicialmente la clase visual del estado.
+        // let = permite modificar el valor posteriormente.
+        // text-bg-warning = clase de Bootstrap que muestra un color amarillo.
         let claseEstado = "text-bg-warning";
 
-        // Aquí se define inicialmente el texto del botón para completar la tarea
-        // textoBoton = guarda el texto que aparecerá dentro del botón
+
+        // Aquí definimos inicialmente el texto del botón de estado.
         let textoBoton = "Marcar como completada";
 
-        // Aquí se verifica si la tarea se encuentra completada
-        // === = compara si dos valores son iguales
+
+        // Aquí verificamos si la tarea está completada.
         if (task.estado === "COMPLETADA") {
 
-            // Aquí se cambia el color del estado cuando la tarea está completada
-            // text-bg-success = clase de Bootstrap que aplica color verde
+            // Aquí cambiamos el estilo visual a color verde.
             claseEstado = "text-bg-success";
 
-            // Aquí se cambia el texto del botón para permitir regresar la tarea a pendiente
+            // Aquí cambiamos el texto del botón.
+            // Entonces, el usuario podrá regresar la tarea a pendiente.
             textoBoton = "Marcar como pendiente";
 
         }
 
-        // Aquí se devuelve la estructura HTML que representará la tarea en la página
-        // return = devuelve el resultado creado por el método
-        // ` ` = permite escribir una estructura HTML de varias líneas dentro de JavaScript
-        // ${ } = permite insertar valores de JavaScript dentro del HTML
+
+        // Aquí devolvemos la estructura HTML correspondiente a la tarea.
+        // return = devuelve el resultado del método.
+        // ` ` = template literal que permite escribir HTML en varias líneas.
+        // ${ } = permite insertar valores JavaScript dentro del HTML.
         return `
 
-            <!-- Aquí se crea el contenedor principal de la tarjeta -->
-            <!-- card = clase de Bootstrap que crea una tarjeta -->
-            <!-- mb-3 = agrega un margen inferior -->
-            <!-- data-task-id = guarda el identificador de la tarea dentro de la tarjeta -->
-            <!-- task.id = obtiene el identificador de la tarea actual -->
-
+            <!-- Aquí se crea la tarjeta principal de la tarea -->
+            <!-- card = clase de Bootstrap para crear una tarjeta -->
+            <!-- mb-3 = agrega margen inferior -->
+            <!-- data-task-id = guarda el ID de la tarea dentro del HTML -->
             <div class="card mb-3" data-task-id="${task.id}">
 
-
                 <!-- Aquí se crea el contenido interno de la tarjeta -->
-                <!-- card-body = clase de Bootstrap que organiza el contenido de la tarjeta -->
-
                 <div class="card-body">
 
-
                     <!-- Aquí se muestra el nombre de la tarea -->
-                    <!-- task.nombre = obtiene el nombre guardado en la tarea -->
-
+                    <!-- task.nombre = obtiene el nombre guardado en el objeto -->
                     <h3 class="card-title h5">
                         ${task.nombre}
                     </h3>
 
-
                     <!-- Aquí se muestra la descripción de la tarea -->
-                    <!-- task.descripcion = obtiene la descripción guardada -->
-
                     <p class="card-text">
                         ${task.descripcion}
                     </p>
 
-
-                    <!-- Aquí se muestra la fecha de entrega de la tarea -->
-                    <!-- task.fechaEntrega = obtiene la fecha guardada -->
-
+                    <!-- Aquí se muestra la fecha de entrega -->
                     <p class="card-text">
                         Fecha de entrega: ${task.fechaEntrega}
                     </p>
 
-
-                    <!-- Aquí se organiza el estado y los botones de la tarea -->
-                    <!-- d-flex = organiza los elementos utilizando Flexbox -->
-                    <!-- justify-content-between = coloca los grupos a cada extremo -->
-                    <!-- align-items-center = alinea los elementos verticalmente -->
-
+                    <!-- Aquí se organiza el estado y los botones -->
+                    <!-- d-flex = utiliza Flexbox -->
+                    <!-- justify-content-between = separa los elementos -->
+                    <!-- align-items-center = alinea verticalmente -->
                     <div class="d-flex justify-content-between align-items-center">
 
-
-                        <!-- Aquí se muestra el estado actual de la tarea -->
-                        <!-- badge = clase de Bootstrap que muestra información resaltada -->
-                        <!-- claseEstado = aplica el color correspondiente al estado -->
-
+                        <!-- Aquí se muestra el estado actual -->
+                        <!-- badge = estilo visual de Bootstrap -->
+                        <!-- claseEstado = clase definida según el estado -->
                         <span class="badge ${claseEstado}">
                             ${task.estado}
                         </span>
 
-
-                        <!-- Aquí se agrupan los botones de acciones de la tarea -->
-                        <!-- d-flex = organiza los botones en una misma fila -->
+                        <!-- Aquí se agrupan los botones de acciones -->
                         <!-- gap-2 = agrega espacio entre los botones -->
-
                         <div class="d-flex gap-2">
 
-
-                            <!-- Aquí se crea el botón que permitirá cambiar el estado de la tarea -->
-                            <!-- btn-completar = clase utilizada desde JavaScript para identificar el botón -->
-                            <!-- btn-success = aplica el estilo verde de Bootstrap -->
-
-                            <button type="button" class="btn btn-success btn-completar done-button">
+                            <!-- Aquí se crea el botón para cambiar el estado -->
+                            <!-- done-button = clase utilizada desde index.js -->
+                            <button
+                                type="button"
+                                class="btn btn-success btn-completar done-button"
+                            >
                                 ${textoBoton}
                             </button>
 
-
-                            <!-- Aquí se crea el botón que permitirá eliminar la tarea -->
-                            <!-- delete-button = clase utilizada desde JavaScript para identificar el botón -->
-                            <!-- btn-danger = aplica el estilo rojo de Bootstrap -->
-
-                            <button type="button" class="delete-button btn btn-danger">
+                            <!-- Aquí se crea el botón para eliminar la tarea -->
+                            <!-- delete-button = clase utilizada desde index.js -->
+                            <button
+                                type="button"
+                                class="delete-button btn btn-danger"
+                            >
                                 Eliminar
                             </button>
 
-
-                        <!-- Cierre grupo de botones -->
                         </div>
 
-
-                    <!-- Cierre fila de estado y acciones -->
                     </div>
 
-
-                <!-- Cierre contenido interno de la tarjeta -->
                 </div>
 
-
-            <!-- Cierre tarjeta de la tarea -->
             </div>
 
         `;
 
     }
 
-    // Aquí se crea el método que permitirá eliminar una tarea
-    // deleteTask = nombre del método que elimina una tarea
-    // taskId = identificador de la tarea que se quiere eliminar
-    deleteTask(taskId) {
 
-        // Aquí se crea un nuevo arreglo donde se guardarán las tareas que no serán eliminadas
-        // const = crea una variable que no será reasignada
-        // newTasks = nombre del nuevo arreglo
-        // [] = crea un arreglo vacío
-        const newTasks = [];
+    // Aquí se crea el método encargado de eliminar una tarea.
+    // async = permite esperar la respuesta del backend.
+    // deleteTask = nombre del método.
+    // taskId = ID de la tarea que se desea eliminar.
+    async deleteTask(taskId) {
 
-        // Aquí se recorren todas las tareas guardadas actualmente
-        // for...of = permite recorrer uno por uno los elementos de un arreglo
-        // task = representa la tarea actual del recorrido
-        // this.tasks = arreglo donde están guardadas todas las tareas
-        for (let task of this.tasks) {
+        // Aquí enviamos una petición DELETE al backend.
+        // ${this.apiUrl}/${taskId} = construye la URL completa con el ID.
+        const response = await fetch(`${this.apiUrl}/${taskId}`, {
 
-            // Aquí se compara el identificador de la tarea actual con el identificador que se quiere eliminar
-            // !== = verifica que dos valores sean diferentes
-            if (task.id !== taskId) {
+            // Aquí indicamos el método HTTP que se utilizará.
+            // DELETE = elimina un recurso existente.
+            method: "DELETE"
 
-                // Aquí se conserva la tarea cuando su identificador es diferente
-                // push = agrega un elemento al final del arreglo
-                newTasks.push(task);
+        });
 
-            }
+
+        // Aquí verificamos si la respuesta fue correcta.
+        if (!response.ok) {
+
+            // Aquí generamos un error si el backend no pudo eliminar la tarea.
+            throw new Error("No fue posible eliminar la tarea.");
 
         }
 
-        // Aquí se reemplaza la lista anterior por la nueva lista de tareas
-        // this.tasks = arreglo principal donde se guardan las tareas
-        // newTasks = contiene solamente las tareas que deben permanecer
-        this.tasks = newTasks;
+
+        // Aquí actualizamos también la lista local del frontend.
+        // filter = crea un nuevo arreglo utilizando una condición.
+        // Solo se conservarán las tareas cuyo ID sea diferente.
+        this.tasks = this.tasks.filter(function (task) {
+
+            // Aquí comprobamos que el ID actual sea diferente al eliminado.
+            // !== = verifica que dos valores sean diferentes.
+            return task.id !== taskId;
+
+        });
 
     }
 
-    // Aquí se crea el método que permitirá cambiar el estado de una tarea
-    // toggleTaskStatus = nombre del método que cambia entre pendiente y completada
-    // taskId = identificador de la tarea que se quiere actualizar
-    toggleTaskStatus(taskId) {
 
-        // Aquí se recorren las tareas para encontrar la que se quiere actualizar
-        // for...of = recorre uno por uno los elementos del arreglo
-        for (let task of this.tasks) {
+    // Aquí se crea el método encargado de cambiar el estado de una tarea.
+    // toggleTaskStatus = cambia entre pendiente y completada.
+    // async = permite esperar la respuesta PUT del backend.
+    async toggleTaskStatus(taskId) {
 
-            // Aquí se verifica si la tarea actual tiene el identificador recibido
-            // === = compara si dos valores son iguales
-            if (task.id === taskId) {
+        // Aquí buscamos la tarea utilizando el ID recibido.
+        // getTaskById = devuelve la tarea correspondiente.
+        const task = this.getTaskById(taskId);
 
-                // Aquí se verifica si la tarea ya se encuentra completada
-                if (task.estado === "COMPLETADA") {
 
-                    // Aquí se devuelve la tarea al estado pendiente
-                    task.estado = "PORHACER";
+        // Aquí verificamos si la tarea realmente existe.
+        // !task = significa que no se encontró ningún objeto.
+        if (!task) {
 
-                }
-                else {
-
-                    // Aquí se cambia la tarea al estado completada
-                    task.estado = "COMPLETADA";
-
-                }
-
-            }
+            // Aquí detenemos el proceso si la tarea no existe.
+            throw new Error("No se encontró la tarea.");
 
         }
 
-    }
 
-    // Aquí se crea el método que permitirá guardar las tareas
-    // save = nombre del método que guarda las tareas en localStorage
-    save() {
+        // Aquí creamos una variable para guardar el nuevo estado.
+        let nuevoEstado;
 
-        // Aquí se convierte la lista de tareas a un texto JSON antes de guardarla
-        // JSON.stringify = transforma el arreglo de objetos en una cadena de texto
-        // localStorage solo puede almacenar valores en formato texto
-        const tasksJson = JSON.stringify(this.tasks);
 
-        // Aquí se guarda la lista serializada utilizando la clave "tasks"
-        // setItem = crea o actualiza un dato dentro de localStorage
-        localStorage.setItem("tasks", tasksJson);
+        // Aquí verificamos si la tarea ya está completada.
+        if (task.estado === "COMPLETADA") {
 
-        // Aquí se convierte el contador a texto para conservarlo en localStorage
-        // String = transforma el valor numérico en una cadena de texto
-        const currentId = String(this.currentId);
+            // Aquí devolvemos la tarea al estado pendiente.
+            nuevoEstado = "PORHACER";
 
-        // Aquí se guarda el último identificador utilizado
-        // Esta información permite que addTask() continúe la numeración después de recargar
-        localStorage.setItem("currentId", currentId);
+        }
+        else {
 
-    }
-
-    // Aquí se crea el método que permitirá recuperar las tareas guardadas
-    // load = nombre del método que carga las tareas desde localStorage
-    load() {
-
-        // Aquí se recupera el texto JSON asociado con la lista de tareas guardada
-        // getItem = obtiene el valor almacenado utilizando la clave indicada
-        // "tasks" = clave utilizada por save() para identificar la lista de tareas
-        // Si la clave no existe, localStorage devuelve null
-        const tasksJson = localStorage.getItem("tasks");
-
-        // Aquí se verifica si se recuperó información antes de intentar convertirla
-        // if = ejecuta las instrucciones cuando tasksJson contiene un valor
-        // Esta validación evita ejecutar JSON.parse() cuando no existen tareas guardadas
-        if (tasksJson) {
-
-            // Aquí se convierte nuevamente el texto JSON en datos de JavaScript
-            // JSON.parse = transforma la cadena de texto en un arreglo de tareas
-            // this.tasks = reemplaza la lista vacía por las tareas recuperadas
-            this.tasks = JSON.parse(tasksJson);
+            // Aquí cambiamos la tarea al estado completado.
+            nuevoEstado = "COMPLETADA";
 
         }
 
-        // Aquí se recupera por separado el último identificador utilizado
-        // currentId = guarda temporalmente el valor recuperado
-        // "currentId" = clave utilizada por save() para identificar el contador
-        // localStorage devuelve el valor como texto o null si todavía no existe
-        const currentId = localStorage.getItem("currentId");
 
-        // Aquí se verifica que exista un contador guardado antes de restaurarlo
-        // Esta condición conserva el valor inicial del constructor en el primer uso
-        if (currentId) {
+        // Aquí creamos el objeto que será enviado al backend.
+        // Usamos los nombres definidos en la entidad Task de Java.
+        const tareaActualizada = {
 
-            // Aquí se restaura el contador dentro del administrador de tareas
-            // Number = convierte el texto recuperado en un número
-            // this.currentId = valor utilizado por addTask() para generar el siguiente id
-            // La conversión evita concatenar texto y permite continuar la secuencia numérica
-            this.currentId = Number(currentId);
+            // Aquí enviamos el nombre actual de la tarea.
+            name: task.nombre,
+
+            // Aquí enviamos la descripción actual.
+            description: task.descripcion,
+
+            // Aquí enviamos la fecha actual.
+            dueDate: task.fechaEntrega,
+
+            // Aquí enviamos el nuevo estado calculado.
+            status: nuevoEstado
+
+        };
+
+
+        // Aquí enviamos la petición PUT al backend.
+        // PUT = se utiliza para actualizar un recurso existente.
+        const response = await fetch(`${this.apiUrl}/${taskId}`, {
+
+            // Aquí indicamos que la operación será una actualización.
+            method: "PUT",
+
+            // Aquí configuramos el tipo de contenido enviado.
+            headers: {
+
+                // Aquí indicamos que enviamos información en formato JSON.
+                "Content-Type": "application/json"
+
+            },
+
+            // Aquí convertimos la tarea actualizada a JSON.
+            body: JSON.stringify(tareaActualizada)
+
+        });
+
+
+        // Aquí verificamos si la actualización fue correcta.
+        if (!response.ok) {
+
+            // Aquí generamos un error si la petición PUT falla.
+            throw new Error("No fue posible actualizar la tarea.");
 
         }
 
+
+        // Aquí obtenemos la tarea actualizada que devuelve Spring Boot.
+        const tareaGuardada = await response.json();
+
+
+        // Aquí actualizamos el estado dentro del objeto utilizado por el frontend.
+        // tareaGuardada.status = valor que regresó el backend.
+        task.estado = tareaGuardada.status;
+
+
+        // Aquí devolvemos la tarea ya actualizada.
+        return task;
+
     }
 
-    // Aquí se crea el método que permitirá mostrar las tareas en la página
-    // render = nombre del método que actualiza la lista de tareas en la interfaz
+
+    // Aquí se crea el método encargado de cargar las tareas.
+    // async = permite esperar la respuesta GET del backend.
+    // load = nombre del método.
+    async load() {
+
+        // Aquí realizamos una petición GET a la API.
+        // Como no indicamos method, fetch utiliza GET automáticamente.
+        const response = await fetch(this.apiUrl);
+
+
+        // Aquí verificamos que la consulta haya sido correcta.
+        if (!response.ok) {
+
+            // Aquí generamos un error si no fue posible consultar las tareas.
+            throw new Error("No fue posible cargar las tareas.");
+
+        }
+
+
+        // Aquí convertimos la respuesta JSON en datos de JavaScript.
+        // tareasBackend = arreglo recibido desde Spring Boot.
+        const tareasBackend = await response.json();
+
+
+        // Aquí convertimos cada tarea del backend al formato del frontend.
+        // map = recorre un arreglo y crea otro arreglo transformado.
+        this.tasks = tareasBackend.map(function (task) {
+
+            // Aquí devolvemos una nueva tarea con los nombres utilizados en el frontend.
+            return {
+
+                // Aquí conservamos el ID generado por PostgreSQL.
+                id: task.id,
+
+                // Aquí convertimos name a nombre.
+                nombre: task.name,
+
+                // Aquí convertimos description a descripcion.
+                descripcion: task.description,
+
+                // Aquí convertimos dueDate a fechaEntrega.
+                fechaEntrega: task.dueDate,
+
+                // Aquí convertimos status a estado.
+                estado: task.status
+
+            };
+
+        });
+
+    }
+
+
+    // Aquí se crea el método encargado de mostrar las tareas en pantalla.
+    // render = reconstruye visualmente la lista.
     render() {
 
-        // Aquí se busca el contenedor donde se mostrarán las tareas
-        // const = crea una variable que no será reasignada
-        // listaTareas = guarda el contenedor de las tareas
-        // document = representa el documento HTML
-        // querySelector = busca el primer elemento que coincida
-        // #listaTareas = identifica el elemento por su id
+        // Aquí buscamos nuevamente el contenedor de tareas.
+        // document.querySelector = busca el elemento por su selector.
         const listaTareas = document.querySelector("#listaTareas");
 
-        // Aquí se limpia el contenido anterior de la lista
-        // innerHTML = permite leer o cambiar el contenido HTML de un elemento
-        // "" = deja el contenido vacío
+
+        // Aquí limpiamos el contenido anterior.
+        // innerHTML = permite modificar el HTML interno del elemento.
+        // "" = deja el contenedor vacío.
         listaTareas.innerHTML = "";
 
-        // Aquí se recorren todas las tareas guardadas
-        // for.....of = permite recorrer uno por uno los elementos de un arreglo
-        // task = representa la tarea actual del recorrido
-        // this.tasks = arreglo donde se encuentran las tareas
+
+        // Aquí recorremos todas las tareas actuales.
+        // for...of = permite recorrer los objetos del arreglo.
         for (let task of this.tasks) {
 
-            // Aquí se agrega a la lista la tarjeta correspondiente a la tarea
-            // += = agrega nuevo contenido sin reemplazar lo que ya se agregó anteriormente
-            // createTaskHtml = crea la estructura HTML de la tarea
-            // task = tarea actual que se está mostrando
+            // Aquí creamos la tarjeta HTML correspondiente a cada tarea.
+            // += = agrega nuevo contenido sin eliminar el contenido anterior.
+            // createTaskHtml(task) = devuelve la estructura HTML de la tarea.
             listaTareas.innerHTML += this.createTaskHtml(task);
 
         }
